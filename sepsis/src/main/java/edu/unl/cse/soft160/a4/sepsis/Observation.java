@@ -17,8 +17,6 @@ public class Observation {
 	private Boolean infectionInvasiveDevice;
 	private Boolean infectionRecentSurgicalProcedure;
 	private Boolean isImmunocompromised;
-	private Boolean lowOutPutShock;
-	private Double hgb;
 	private Double respiratoryPaOxyFiOxy;
 	private Double coagulationPlatelets;
 	private Double liverBilirubin;
@@ -37,10 +35,10 @@ public class Observation {
 			Double wBCCount, Double systolicBloodPressure, Double diastolicBloodPressure, Boolean isInpatientStatus,
 			Boolean needForVasopressorSupport, Boolean isResponsive, Boolean cardiacArrhythmia,
 			Boolean declineInBaselineMentalStatus, Boolean infectionSkinWound, Boolean infectionInvasiveDevice,
-			Boolean infectionRecentSurgicalProcedure, Boolean isImmunocompromised, Boolean lowOutPutShock, Double hgb,
-			Double respiratoryPaOxyFiOxy, Double coagulationPlatelets, Double liverBilirubin, Double dopamine,
-			Boolean anyDoputamine, Double epinephrine, Double norepinephrine, Double glasgowComaScale,
-			Double renalCreatinine, Double urineOutput, Integer birthDay, Integer birthMonth, Integer birthYear) {
+			Boolean infectionRecentSurgicalProcedure, Boolean isImmunocompromised, Double respiratoryPaOxyFiOxy,
+			Double coagulationPlatelets, Double liverBilirubin, Double dopamine, Boolean anyDoputamine,
+			Double epinephrine, Double norepinephrine, Double glasgowComaScale, Double renalCreatinine,
+			Double urineOutput, Integer birthDay, Integer birthMonth, Integer birthYear) {
 		super();
 		this.isPregnant = isPregnant;
 		this.temperature = temperature;
@@ -58,8 +56,6 @@ public class Observation {
 		this.infectionInvasiveDevice = infectionInvasiveDevice;
 		this.infectionRecentSurgicalProcedure = infectionRecentSurgicalProcedure;
 		this.isImmunocompromised = isImmunocompromised;
-		this.lowOutPutShock = lowOutPutShock;
-		this.hgb = hgb;
 		this.respiratoryPaOxyFiOxy = respiratoryPaOxyFiOxy;
 		this.coagulationPlatelets = coagulationPlatelets;
 		this.liverBilirubin = liverBilirubin;
@@ -201,22 +197,6 @@ public class Observation {
 
 	public void setIsImmunocompromised(Boolean isImmunocompromised) {
 		this.isImmunocompromised = isImmunocompromised;
-	}
-
-	public Boolean getLowOutPutShock() {
-		return lowOutPutShock;
-	}
-
-	public void setLowOutPutShock(Boolean lowOutPutShock) {
-		this.lowOutPutShock = lowOutPutShock;
-	}
-
-	public Double getHgb() {
-		return hgb;
-	}
-
-	public void setHgb(Double hgb) {
-		this.hgb = hgb;
 	}
 
 	public Double getRespiratoryPaOxyFiOxy() {
