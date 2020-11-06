@@ -1,165 +1,78 @@
 package edu.unl.cse.soft160.a4.sepsis;
 
 public class Observation {
-	// Field Declaration
-	private Boolean isImpatient;
 	private Boolean isPregnant;
 	private Double temperature;
 	private Double heartRate;
 	private Double respiratoryRate;
-	private Double wbcCount;
+	private Double wBCCount;
 	private Double systolicBloodPressure;
 	private Double diastolicBloodPressure;
+	private Boolean isInpatientStatus;
 	private Boolean needForVasopressorSupport;
 	private Boolean isResponsive;
-	private Boolean isStable;
 	private Boolean cardiacArrhythmia;
 	private Boolean declineInBaselineMentalStatus;
 	private Boolean infectionSkinWound;
 	private Boolean infectionInvasiveDevice;
-	private Boolean infectionRecentSurgicalProcedure;	
-	private Boolean isImmunocompromised;	
-	private Boolean respiratoryPaOxFiOx;
-	private Boolean coagulationPlatelets;
-	private Boolean liverBilirubin;
-	private Boolean cardiovascularHypotension;
-	private Boolean centralNervousGlasgow;
-	private Boolean renalCreatineUrine;
-	private Boolean presenceOfOrganDysfunction;
+	private Boolean infectionRecentSurgicalProcedure;
+	private Boolean isImmunocompromised;
+	private Boolean lowOutPutShock;
+	private Double hgb;
+	private Double respiratoryPaOxyFiOxy;
+	private Double coagulationPlatelets;
+	private Double liverBilirubin;
+	private Double dopamine;
+	private Boolean anyDoputamine;
+	private Double epinephrine;
+	private Double norepinephrine;
+	private Double glasgowComaScale;
+	private Double renalCreatinine;
+	private Double urineOutput;
+	private Integer birthDay;
+	private Integer birthMonth;
+	private Integer birthYear;
 
-	// Constructor
-	public Boolean getInfectionSkinWound() {
-		return infectionSkinWound;
-	}
-
-	public Observation(Boolean isImpatient, Boolean isPregnant, Double temperature, Double heartRate,
-			Double respiratoryRate, Double wbcCount, Double systolicBloodPressure, Double diastolicBloodPressure,
-			Boolean needForVasopressorSupport, Boolean isResponsive, Boolean isStable, Boolean cardiacArrhythmia,
+	public Observation(Boolean isPregnant, Double temperature, Double heartRate, Double respiratoryRate,
+			Double wBCCount, Double systolicBloodPressure, Double diastolicBloodPressure, Boolean isInpatientStatus,
+			Boolean needForVasopressorSupport, Boolean isResponsive, Boolean cardiacArrhythmia,
 			Boolean declineInBaselineMentalStatus, Boolean infectionSkinWound, Boolean infectionInvasiveDevice,
-			Boolean infectionRecentSurgicalProcedure, Boolean isImmunocompromised, Boolean respiratoryPaOxFiOx,
-			Boolean coagulationPlatelets, Boolean liverBilirubin, Boolean cardiovascularHypotension,
-			Boolean centralNervousGlasgow, Boolean renalCreatineUrine, Boolean presenceOfOrganDysfunction) {
+			Boolean infectionRecentSurgicalProcedure, Boolean isImmunocompromised, Boolean lowOutPutShock, Double hgb,
+			Double respiratoryPaOxyFiOxy, Double coagulationPlatelets, Double liverBilirubin, Double dopamine,
+			Boolean anyDoputamine, Double epinephrine, Double norepinephrine, Double glasgowComaScale,
+			Double renalCreatinine, Double urineOutput, Integer birthDay, Integer birthMonth, Integer birthYear) {
 		super();
-		this.isImpatient = isImpatient;
 		this.isPregnant = isPregnant;
 		this.temperature = temperature;
 		this.heartRate = heartRate;
 		this.respiratoryRate = respiratoryRate;
-		this.wbcCount = wbcCount;
+		this.wBCCount = wBCCount;
 		this.systolicBloodPressure = systolicBloodPressure;
 		this.diastolicBloodPressure = diastolicBloodPressure;
+		this.isInpatientStatus = isInpatientStatus;
 		this.needForVasopressorSupport = needForVasopressorSupport;
 		this.isResponsive = isResponsive;
-		this.isStable = isStable;
 		this.cardiacArrhythmia = cardiacArrhythmia;
 		this.declineInBaselineMentalStatus = declineInBaselineMentalStatus;
 		this.infectionSkinWound = infectionSkinWound;
 		this.infectionInvasiveDevice = infectionInvasiveDevice;
 		this.infectionRecentSurgicalProcedure = infectionRecentSurgicalProcedure;
 		this.isImmunocompromised = isImmunocompromised;
-		this.respiratoryPaOxFiOx = respiratoryPaOxFiOx;
+		this.lowOutPutShock = lowOutPutShock;
+		this.hgb = hgb;
+		this.respiratoryPaOxyFiOxy = respiratoryPaOxyFiOxy;
 		this.coagulationPlatelets = coagulationPlatelets;
 		this.liverBilirubin = liverBilirubin;
-		this.cardiovascularHypotension = cardiovascularHypotension;
-		this.centralNervousGlasgow = centralNervousGlasgow;
-		this.renalCreatineUrine = renalCreatineUrine;
-		this.presenceOfOrganDysfunction = presenceOfOrganDysfunction;
-	}	
-
-	// Getters and Setters
-	
-
-
-	public void setInfectionSkinWound(Boolean infectionSkinWound) {
-		this.infectionSkinWound = infectionSkinWound;
-	}
-
-	public Boolean getInfectionInvasiveDevice() {
-		return infectionInvasiveDevice;
-	}
-
-	public void setInfectionInvasiveDevice(Boolean infectionInvasiveDevice) {
-		this.infectionInvasiveDevice = infectionInvasiveDevice;
-	}
-
-	public Boolean getInfectionRecentSurgicalProcedure() {
-		return infectionRecentSurgicalProcedure;
-	}
-
-	public void setInfectionRecentSurgicalProcedure(Boolean infectionRecentSurgicalProcedure) {
-		this.infectionRecentSurgicalProcedure = infectionRecentSurgicalProcedure;
-	}
-
-	public Boolean getIsImmunocompromised() {
-		return isImmunocompromised;
-	}
-
-	public void setIsImmunocompromised(Boolean isImmunocompromised) {
-		this.isImmunocompromised = isImmunocompromised;
-	}
-
-	public Boolean getPresenceOfOrganDysfunction() {
-		return presenceOfOrganDysfunction;
-	}
-
-	public void setPresenceOfOrganDysfunction(Boolean presenceOfOrganDysfunction) {
-		this.presenceOfOrganDysfunction = presenceOfOrganDysfunction;
-	}
-
-	public Boolean getRespiratoryPaOxFiOx() {
-		return respiratoryPaOxFiOx;
-	}
-
-	public void setRespiratoryPaOxFiOx(Boolean respiratoryPaOxFiOx) {
-		this.respiratoryPaOxFiOx = respiratoryPaOxFiOx;
-	}
-
-	public Boolean getCoagulationPlatelets() {
-		return coagulationPlatelets;
-	}
-
-	public void setCoagulationPlatelets(Boolean coagulationPlatelets) {
-		this.coagulationPlatelets = coagulationPlatelets;
-	}
-
-	public Boolean getLiverBilirubin() {
-		return liverBilirubin;
-	}
-
-	public void setLiverBilirubin(Boolean liverBilirubin) {
-		this.liverBilirubin = liverBilirubin;
-	}
-
-	public Boolean getCardiovascularHypotension() {
-		return cardiovascularHypotension;
-	}
-
-	public void setCardiovascularHypotension(Boolean cardiovascularHypotension) {
-		this.cardiovascularHypotension = cardiovascularHypotension;
-	}
-
-	public Boolean getCentralNervousGlasgow() {
-		return centralNervousGlasgow;
-	}
-
-	public void setCentralNervousGlasgow(Boolean centralNervousGlasgow) {
-		this.centralNervousGlasgow = centralNervousGlasgow;
-	}
-
-	public Boolean getRenalCreatineUrine() {
-		return renalCreatineUrine;
-	}
-
-	public void setRenalCreatineUrine(Boolean renalCreatineUrine) {
-		this.renalCreatineUrine = renalCreatineUrine;
-	}
-
-	public Boolean getIsImpatient() {
-		return isImpatient;
-	}
-
-	public void setIsImpatient(Boolean isImpatient) {
-		this.isImpatient = isImpatient;
+		this.dopamine = dopamine;
+		this.anyDoputamine = anyDoputamine;
+		this.epinephrine = epinephrine;
+		this.norepinephrine = norepinephrine;
+		this.glasgowComaScale = glasgowComaScale;
+		this.renalCreatinine = renalCreatinine;
+		this.urineOutput = urineOutput;
+		this.birthDay = birthDay;
+		this.birthMonth = birthMonth;
+		this.birthYear = birthYear;
 	}
 
 	public Boolean getIsPregnant() {
@@ -194,12 +107,12 @@ public class Observation {
 		this.respiratoryRate = respiratoryRate;
 	}
 
-	public Double getWbcCount() {
-		return wbcCount;
+	public Double getwBCCount() {
+		return wBCCount;
 	}
 
-	public void setWbcCount(Double wbcCount) {
-		this.wbcCount = wbcCount;
+	public void setwBCCount(Double wBCCount) {
+		this.wBCCount = wBCCount;
 	}
 
 	public Double getSystolicBloodPressure() {
@@ -218,6 +131,14 @@ public class Observation {
 		this.diastolicBloodPressure = diastolicBloodPressure;
 	}
 
+	public Boolean getIsInpatientStatus() {
+		return isInpatientStatus;
+	}
+
+	public void setIsInpatientStatus(Boolean isInpatientStatus) {
+		this.isInpatientStatus = isInpatientStatus;
+	}
+
 	public Boolean getNeedForVasopressorSupport() {
 		return needForVasopressorSupport;
 	}
@@ -234,14 +155,6 @@ public class Observation {
 		this.isResponsive = isResponsive;
 	}
 
-	public Boolean getIsStable() {
-		return isStable;
-	}
-
-	public void setIsStable(Boolean isStable) {
-		this.isStable = isStable;
-	}
-
 	public Boolean getCardiacArrhythmia() {
 		return cardiacArrhythmia;
 	}
@@ -256,6 +169,158 @@ public class Observation {
 
 	public void setDeclineInBaselineMentalStatus(Boolean declineInBaselineMentalStatus) {
 		this.declineInBaselineMentalStatus = declineInBaselineMentalStatus;
+	}
+
+	public Boolean getInfectionSkinWound() {
+		return infectionSkinWound;
+	}
+
+	public void setInfectionSkinWound(Boolean infectionSkinWound) {
+		this.infectionSkinWound = infectionSkinWound;
+	}
+
+	public Boolean getInfectionInvasiveDevice() {
+		return infectionInvasiveDevice;
+	}
+
+	public void setInfectionInvasiveDevice(Boolean infectionInvasiveDevice) {
+		this.infectionInvasiveDevice = infectionInvasiveDevice;
+	}
+
+	public Boolean getInfectionRecentSurgicalProcedure() {
+		return infectionRecentSurgicalProcedure;
+	}
+
+	public void setInfectionRecentSurgicalProcedure(Boolean infectionRecentSurgicalProcedure) {
+		this.infectionRecentSurgicalProcedure = infectionRecentSurgicalProcedure;
+	}
+
+	public Boolean getIsImmunocompromised() {
+		return isImmunocompromised;
+	}
+
+	public void setIsImmunocompromised(Boolean isImmunocompromised) {
+		this.isImmunocompromised = isImmunocompromised;
+	}
+
+	public Boolean getLowOutPutShock() {
+		return lowOutPutShock;
+	}
+
+	public void setLowOutPutShock(Boolean lowOutPutShock) {
+		this.lowOutPutShock = lowOutPutShock;
+	}
+
+	public Double getHgb() {
+		return hgb;
+	}
+
+	public void setHgb(Double hgb) {
+		this.hgb = hgb;
+	}
+
+	public Double getRespiratoryPaOxyFiOxy() {
+		return respiratoryPaOxyFiOxy;
+	}
+
+	public void setRespiratoryPaOxyFiOxy(Double respiratoryPaOxyFiOxy) {
+		this.respiratoryPaOxyFiOxy = respiratoryPaOxyFiOxy;
+	}
+
+	public Double getCoagulationPlatelets() {
+		return coagulationPlatelets;
+	}
+
+	public void setCoagulationPlatelets(Double coagulationPlatelets) {
+		this.coagulationPlatelets = coagulationPlatelets;
+	}
+
+	public Double getLiverBilirubin() {
+		return liverBilirubin;
+	}
+
+	public void setLiverBilirubin(Double liverBilirubin) {
+		this.liverBilirubin = liverBilirubin;
+	}
+
+	public Double getDopamine() {
+		return dopamine;
+	}
+
+	public void setDopamine(Double dopamine) {
+		this.dopamine = dopamine;
+	}
+
+	public Boolean getAnyDoputamine() {
+		return anyDoputamine;
+	}
+
+	public void setAnyDoputamine(Boolean anyDoputamine) {
+		this.anyDoputamine = anyDoputamine;
+	}
+
+	public Double getEpinephrine() {
+		return epinephrine;
+	}
+
+	public void setEpinephrine(Double epinephrine) {
+		this.epinephrine = epinephrine;
+	}
+
+	public Double getNorepinephrine() {
+		return norepinephrine;
+	}
+
+	public void setNorepinephrine(Double norepinephrine) {
+		this.norepinephrine = norepinephrine;
+	}
+
+	public Double getGlasgowComaScale() {
+		return glasgowComaScale;
+	}
+
+	public void setGlasgowComaScale(Double glasgowComaScale) {
+		this.glasgowComaScale = glasgowComaScale;
+	}
+
+	public Double getRenalCreatinine() {
+		return renalCreatinine;
+	}
+
+	public void setRenalCreatinine(Double renalCreatinine) {
+		this.renalCreatinine = renalCreatinine;
+	}
+
+	public Double getUrineOutput() {
+		return urineOutput;
+	}
+
+	public void setUrineOutput(Double urineOutput) {
+		this.urineOutput = urineOutput;
+	}
+
+	public Integer getBirthDay() {
+		return birthDay;
+	}
+
+	public void setBirthDay(Integer birthDay) {
+		this.birthDay = birthDay;
+	}
+
+	public Integer getBirthMonth() {
+		return birthMonth;
+	}
+
+	public void setBirthMonth(Integer birthMonth) {
+		this.birthMonth = birthMonth;
+	}
+
+	public Integer getBirthYear() {
+		return birthYear;
+	}
+
+	public void setBirthYear(Integer birthYear) {
+		this.birthYear = birthYear;
 	}
 
 }
