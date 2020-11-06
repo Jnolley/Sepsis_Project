@@ -15,9 +15,110 @@ public class Observation {
 	private Boolean isStable;
 	private Boolean cardiacArrhythmia;
 	private Boolean declineInBaselineMentalStatus;
+	private Boolean infectionSkinWound;
+	private Boolean infectionInvasiveDevice;
+	private Boolean infectionRecentSurgicalProcedure;	
+	private Boolean isImmunocompromised;	
+	private Boolean respiratoryPaOxFiOx;
+	private Boolean coagulationPlatelets;
+	private Boolean liverBilirubin;
+	private Boolean cardiovascularHypotension;
+	private Boolean centralNervousGlasgow;
+	private Boolean renalCreatineUrine;
+	private Boolean presenceOfOrganDysfunction;
+
 	// Constructor
 
 	// Getters and Setters
+	
+	public Boolean getInfectionSkinWound() {
+		return infectionSkinWound;
+	}
+
+	public void setInfectionSkinWound(Boolean infectionSkinWound) {
+		this.infectionSkinWound = infectionSkinWound;
+	}
+
+	public Boolean getInfectionInvasiveDevice() {
+		return infectionInvasiveDevice;
+	}
+
+	public void setInfectionInvasiveDevice(Boolean infectionInvasiveDevice) {
+		this.infectionInvasiveDevice = infectionInvasiveDevice;
+	}
+
+	public Boolean getInfectionRecentSurgicalProcedure() {
+		return infectionRecentSurgicalProcedure;
+	}
+
+	public void setInfectionRecentSurgicalProcedure(Boolean infectionRecentSurgicalProcedure) {
+		this.infectionRecentSurgicalProcedure = infectionRecentSurgicalProcedure;
+	}
+
+	public Boolean getIsImmunocompromised() {
+		return isImmunocompromised;
+	}
+
+	public void setIsImmunocompromised(Boolean isImmunocompromised) {
+		this.isImmunocompromised = isImmunocompromised;
+	}
+
+	public Boolean getPresenceOfOrganDysfunction() {
+		return presenceOfOrganDysfunction;
+	}
+
+	public void setPresenceOfOrganDysfunction(Boolean presenceOfOrganDysfunction) {
+		this.presenceOfOrganDysfunction = presenceOfOrganDysfunction;
+	}
+
+	public Boolean getRespiratoryPaOxFiOx() {
+		return respiratoryPaOxFiOx;
+	}
+
+	public void setRespiratoryPaOxFiOx(Boolean respiratoryPaOxFiOx) {
+		this.respiratoryPaOxFiOx = respiratoryPaOxFiOx;
+	}
+
+	public Boolean getCoagulationPlatelets() {
+		return coagulationPlatelets;
+	}
+
+	public void setCoagulationPlatelets(Boolean coagulationPlatelets) {
+		this.coagulationPlatelets = coagulationPlatelets;
+	}
+
+	public Boolean getLiverBilirubin() {
+		return liverBilirubin;
+	}
+
+	public void setLiverBilirubin(Boolean liverBilirubin) {
+		this.liverBilirubin = liverBilirubin;
+	}
+
+	public Boolean getCardiovascularHypotension() {
+		return cardiovascularHypotension;
+	}
+
+	public void setCardiovascularHypotension(Boolean cardiovascularHypotension) {
+		this.cardiovascularHypotension = cardiovascularHypotension;
+	}
+
+	public Boolean getCentralNervousGlasgow() {
+		return centralNervousGlasgow;
+	}
+
+	public void setCentralNervousGlasgow(Boolean centralNervousGlasgow) {
+		this.centralNervousGlasgow = centralNervousGlasgow;
+	}
+
+	public Boolean getRenalCreatineUrine() {
+		return renalCreatineUrine;
+	}
+
+	public void setRenalCreatineUrine(Boolean renalCreatineUrine) {
+		this.renalCreatineUrine = renalCreatineUrine;
+	}
+
 	public Boolean getIsImpatient() {
 		return isImpatient;
 	}
