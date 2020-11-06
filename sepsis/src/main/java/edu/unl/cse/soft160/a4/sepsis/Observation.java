@@ -28,12 +28,47 @@ public class Observation {
 	private Boolean presenceOfOrganDysfunction;
 
 	// Constructor
-
-	// Getters and Setters
-	
 	public Boolean getInfectionSkinWound() {
 		return infectionSkinWound;
 	}
+
+	public Observation(Boolean isImpatient, Boolean isPregnant, Double temperature, Double heartRate,
+			Double respiratoryRate, Double wbcCount, Double systolicBloodPressure, Double diastolicBloodPressure,
+			Boolean needForVasopressorSupport, Boolean isResponsive, Boolean isStable, Boolean cardiacArrhythmia,
+			Boolean declineInBaselineMentalStatus, Boolean infectionSkinWound, Boolean infectionInvasiveDevice,
+			Boolean infectionRecentSurgicalProcedure, Boolean isImmunocompromised, Boolean respiratoryPaOxFiOx,
+			Boolean coagulationPlatelets, Boolean liverBilirubin, Boolean cardiovascularHypotension,
+			Boolean centralNervousGlasgow, Boolean renalCreatineUrine, Boolean presenceOfOrganDysfunction) {
+		super();
+		this.isImpatient = isImpatient;
+		this.isPregnant = isPregnant;
+		this.temperature = temperature;
+		this.heartRate = heartRate;
+		this.respiratoryRate = respiratoryRate;
+		this.wbcCount = wbcCount;
+		this.systolicBloodPressure = systolicBloodPressure;
+		this.diastolicBloodPressure = diastolicBloodPressure;
+		this.needForVasopressorSupport = needForVasopressorSupport;
+		this.isResponsive = isResponsive;
+		this.isStable = isStable;
+		this.cardiacArrhythmia = cardiacArrhythmia;
+		this.declineInBaselineMentalStatus = declineInBaselineMentalStatus;
+		this.infectionSkinWound = infectionSkinWound;
+		this.infectionInvasiveDevice = infectionInvasiveDevice;
+		this.infectionRecentSurgicalProcedure = infectionRecentSurgicalProcedure;
+		this.isImmunocompromised = isImmunocompromised;
+		this.respiratoryPaOxFiOx = respiratoryPaOxFiOx;
+		this.coagulationPlatelets = coagulationPlatelets;
+		this.liverBilirubin = liverBilirubin;
+		this.cardiovascularHypotension = cardiovascularHypotension;
+		this.centralNervousGlasgow = centralNervousGlasgow;
+		this.renalCreatineUrine = renalCreatineUrine;
+		this.presenceOfOrganDysfunction = presenceOfOrganDysfunction;
+	}	
+
+	// Getters and Setters
+	
+
 
 	public void setInfectionSkinWound(Boolean infectionSkinWound) {
 		this.infectionSkinWound = infectionSkinWound;
