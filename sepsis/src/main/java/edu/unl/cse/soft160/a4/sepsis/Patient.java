@@ -4,24 +4,24 @@ import java.util.ArrayList;
 
 public class Patient {
 	
-	boolean isAdult;
+	int yearBorn;
 	ArrayList<Observation> observaitonList = new ArrayList<Observation>();
 
 
-public Patient(boolean isAdult, ArrayList<Observation> observaitonList) {
+public Patient(int yearBorn, ArrayList<Observation> observaitonList) {
 	super();
-	this.isAdult = isAdult;
+	this.yearBorn = yearBorn;
 	this.observaitonList = observaitonList;
 }
 
 
-public boolean isAdult() {
-	return isAdult;
+public int yearBorn() {
+	return yearBorn;
 }
 
 
-public void setAdult(boolean isAdult) {
-	this.isAdult = isAdult;
+public void setAdult(int yearBorn) {
+	this.yearBorn = yearBorn;
 }
 
 
