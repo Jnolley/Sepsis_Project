@@ -27,9 +27,7 @@ public class Observation {
 	private Double glasgowComaScale;
 	private Double renalCreatinine;
 	private Double urineOutput;
-	private Integer birthDay;
-	private Integer birthMonth;
-	private Integer birthYear;
+	
 
 	public Observation(Boolean isPregnant, Double temperature, Double heartRate, Double respiratoryRate,
 			Double wBCCount, Double systolicBloodPressure, Double diastolicBloodPressure, Boolean isInpatientStatus,
@@ -38,7 +36,7 @@ public class Observation {
 			Boolean infectionRecentSurgicalProcedure, Boolean isImmunocompromised, Double respiratoryPaOxyFiOxy,
 			Double coagulationPlatelets, Double liverBilirubin, Double dopamine, Boolean anyDoputamine,
 			Double epinephrine, Double norepinephrine, Double glasgowComaScale, Double renalCreatinine,
-			Double urineOutput, Integer birthDay, Integer birthMonth, Integer birthYear) {
+			Double urineOutput) {
 		super();
 		this.isPregnant = isPregnant;
 		this.temperature = temperature;
@@ -66,9 +64,6 @@ public class Observation {
 		this.glasgowComaScale = glasgowComaScale;
 		this.renalCreatinine = renalCreatinine;
 		this.urineOutput = urineOutput;
-		this.birthDay = birthDay;
-		this.birthMonth = birthMonth;
-		this.birthYear = birthYear;
 	}
 
 	public Boolean getIsPregnant() {
@@ -278,29 +273,4 @@ public class Observation {
 	public void setUrineOutput(Double urineOutput) {
 		this.urineOutput = urineOutput;
 	}
-
-	public Integer getBirthDay() {
-		return birthDay;
-	}
-
-	public void setBirthDay(Integer birthDay) {
-		this.birthDay = birthDay;
-	}
-
-	public Integer getBirthMonth() {
-		return birthMonth;
-	}
-
-	public void setBirthMonth(Integer birthMonth) {
-		this.birthMonth = birthMonth;
-	}
-
-	public Integer getBirthYear() {
-		return birthYear;
-	}
-
-	public void setBirthYear(Integer birthYear) {
-		this.birthYear = birthYear;
-	}
-
 }
