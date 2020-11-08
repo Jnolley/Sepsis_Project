@@ -1,5 +1,7 @@
 package edu.unl.cse.soft160.a4.sepsis;
 
+import java.time.LocalDate;
+
 public class Observation {
 	private Boolean isPregnant;
 	private Double temperature;
@@ -27,7 +29,7 @@ public class Observation {
 	private Double glasgowComaScale;
 	private Double renalCreatinine;
 	private Double urineOutput;
-	
+	private LocalDate timeStamp;
 
 	public Observation(Boolean isPregnant, Double temperature, Double heartRate, Double respiratoryRate,
 			Double wBCCount, Double systolicBloodPressure, Double diastolicBloodPressure, Boolean isInpatientStatus,
@@ -64,6 +66,7 @@ public class Observation {
 		this.glasgowComaScale = glasgowComaScale;
 		this.renalCreatinine = renalCreatinine;
 		this.urineOutput = urineOutput;
+		this.timeStamp = LocalDate.now();
 	}
 
 	public Boolean getIsPregnant() {
@@ -272,5 +275,9 @@ public class Observation {
 
 	public void setUrineOutput(Double urineOutput) {
 		this.urineOutput = urineOutput;
+	}
+
+	public LocalDate getTimeStamp() {
+		return timeStamp;
 	}
 }
