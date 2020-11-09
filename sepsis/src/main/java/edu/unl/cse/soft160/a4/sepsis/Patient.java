@@ -3,26 +3,27 @@ package edu.unl.cse.soft160.a4.sepsis;
 import java.util.ArrayList;
 
 public class Patient {
-
+	private ArrayList<Observation> observation = new ArrayList<Observation>();
 	private Integer birthDay;
 	private Integer birthMonth;
 	private Integer birthYear;
-	ArrayList<Observation> observaitonList = new ArrayList<Observation>();
 
-	public Patient(Integer birthDay, Integer birthMonth, Integer birthYear, ArrayList<Observation> observaitonList) {
+	public Patient(ArrayList<Observation> observation, Integer birthDay, Integer birthMonth, Integer birthYear) {
 		super();
+		this.observation = observation;
 		this.birthDay = birthDay;
 		this.birthMonth = birthMonth;
 		this.birthYear = birthYear;
-		this.observaitonList = observaitonList;
 	}
 
-	public ArrayList<Observation> getObservaitonList() {
-		return observaitonList;
+	public Observation getCurrentObservation() {
+		int numberOfObservation = observation.size();
+		return observation.get(numberOfObservation - 1);
 	}
 
-	public void setObservaitonList(ArrayList<Observation> observaitonList) {
-		this.observaitonList = observaitonList;
+	public Observation getLastObservation() {
+		int numberOfObservation = observation.size();
+		return observation.get(numberOfObservation - 2);
 	}
 
 	public Integer getBirthDay() {
@@ -48,5 +49,4 @@ public class Patient {
 	public void setBirthYear(Integer birthYear) {
 		this.birthYear = birthYear;
 	}
-
 }

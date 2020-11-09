@@ -30,6 +30,7 @@ public class Observation {
 	private Double renalCreatinine;
 	private Double urineOutput;
 	private LocalDate timeStamp;
+	private Double map;
 
 	public Observation(Boolean isPregnant, Double temperature, Double heartRate, Double respiratoryRate,
 			Double wBCCount, Double systolicBloodPressure, Double diastolicBloodPressure, Boolean isInpatientStatus,
@@ -67,6 +68,7 @@ public class Observation {
 		this.renalCreatinine = renalCreatinine;
 		this.urineOutput = urineOutput;
 		this.timeStamp = LocalDate.now();
+		this.map = (systolicBloodPressure - diastolicBloodPressure) / 3 + diastolicBloodPressure;
 	}
 
 	public Boolean getIsPregnant() {
@@ -101,11 +103,11 @@ public class Observation {
 		this.respiratoryRate = respiratoryRate;
 	}
 
-	public Double getwBCCount() {
+	public Double getWBCCount() {
 		return wBCCount;
 	}
 
-	public void setwBCCount(Double wBCCount) {
+	public void setWBCCount(Double wBCCount) {
 		this.wBCCount = wBCCount;
 	}
 
@@ -277,7 +279,16 @@ public class Observation {
 		this.urineOutput = urineOutput;
 	}
 
-	public LocalDate getTimeStamp() {
+	public LocalDate getTime() {
 		return timeStamp;
 	}
+
+	public Double getMap() {
+		return map;
+	}
+
+	public void setMap() {
+		this.map = (systolicBloodPressure - diastolicBloodPressure) / 3 + diastolicBloodPressure;
+	}
+
 }
