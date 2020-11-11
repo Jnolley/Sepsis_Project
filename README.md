@@ -9,8 +9,8 @@ bugs**
 
 Authors:
 *   Adam Kamrath <akamrath2@huskers.unl.edu>
-*   Harry Do <>
-*   Jack Nolley <>
+*   Harry Do <hdo7@huskers.unl.edu>
+*   Jack Nolley <jackmnolley@gmail.com>
 *   Nathan Srisa-an <>
 
 
