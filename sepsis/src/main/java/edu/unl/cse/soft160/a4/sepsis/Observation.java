@@ -39,7 +39,7 @@ public class Observation {
 			Boolean infectionRecentSurgicalProcedure, Boolean isImmunocompromised, Double respiratoryPaOxyFiOxy,
 			Double coagulationPlatelets, Double liverBilirubin, Double dopamine, Boolean anyDoputamine,
 			Double epinephrine, Double norepinephrine, Double glasgowComaScale, Double renalCreatinine,
-			Double urineOutput) {
+			Double urineOutput, LocalDate time) {
 		super();
 		this.isPregnant = isPregnant;
 		this.temperature = temperature;
@@ -67,7 +67,7 @@ public class Observation {
 		this.glasgowComaScale = glasgowComaScale;
 		this.renalCreatinine = renalCreatinine;
 		this.urineOutput = urineOutput;
-		this.timeStamp = LocalDate.now();
+		this.timeStamp = time;
 		this.map = (systolicBloodPressure - diastolicBloodPressure) / 3 + diastolicBloodPressure;
 	}
 
@@ -281,6 +281,10 @@ public class Observation {
 
 	public LocalDate getTime() {
 		return timeStamp;
+	}
+
+	public void setTime(int month, int day, int year) {
+		this.timeStamp = LocalDate.of(year, month, day);
 	}
 
 	public Double getMap() {

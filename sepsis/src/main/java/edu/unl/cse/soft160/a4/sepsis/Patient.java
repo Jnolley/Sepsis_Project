@@ -1,5 +1,7 @@
 package edu.unl.cse.soft160.a4.sepsis;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 public class Patient {
@@ -17,13 +19,24 @@ public class Patient {
 	}
 
 	public Observation getCurrentObservation() {
-		int numberOfObservation = observation.size();
-		return observation.get(numberOfObservation - 1);
+		for (Observation observation : observation) {
+			Period period = Period.between(observation.getTime(), LocalDate.now());
+			if (period.getDays() <= 1) {
+				return observation;
+			}
+		}
+		return null;
 	}
 
 	public Observation getLastObservation() {
-		int numberOfObservation = observation.size();
-		return observation.get(numberOfObservation - 2);
+		for (Observation observation : observation) {
+			LocalDate time = observation.getTime();
+			Period period = Period.between(observation.getTime(), LocalDate.now());
+			if (period.getDays() > 1 && period.getDays() <= 2) {
+				return observation;
+			}
+		}
+		return null;
 	}
 
 	public Integer getBirthDay() {
