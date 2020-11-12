@@ -8,124 +8,121 @@ import java.util.ArrayList;
 
 public class SepsisDeterminationAlgorithm {
 	public static Boolean isNotAdult(Patient patient) {
-		LocalDate birthDate = LocalDate.of(patient.getBirthYear(), patient.getBirthMonth(), patient.getBirthDay());
+		LocalDate birthDate = patient.getBirthDate();
 		LocalDate currentDate = LocalDate.now();
 		Period diff = Period.between(birthDate, currentDate);
 		return (diff.getYears() < 18);
 	}
 
-	public static boolean decideSIRSCriteria(Observation observation) {
-		if ((observation.getTemperature() < 36 || observation.getTemperature() > 38.5)
-				&& observation.getHeartRate() >= 110) {
+	public static boolean decideSIRSCriteria(Concept concept) {
+		if ((concept.getTemperature() < 36 || concept.getTemperature() > 38.5) && concept.getHeartRate() >= 110) {
 			return true;
 		}
-		if ((observation.getTemperature() < 36 || observation.getTemperature() > 38.5)
-				&& observation.getRespiratoryRate() > 24) {
+		if ((concept.getTemperature() < 36 || concept.getTemperature() > 38.5) && concept.getRespiratoryRate() > 24) {
 			return true;
 		}
-		if ((observation.getTemperature() < 36 || observation.getTemperature() > 38.5)
-				&& (observation.getWBCCount() < 3 || observation.getWBCCount() >= 15)) {
+		if ((concept.getTemperature() < 36 || concept.getTemperature() > 38.5)
+				&& (concept.getWBCCount() < 3 || concept.getWBCCount() >= 15)) {
 			return true;
 		}
-		if (observation.getHeartRate() >= 110 && observation.getRespiratoryRate() > 24) {
+		if (concept.getHeartRate() >= 110 && concept.getRespiratoryRate() > 24) {
 			return true;
 		}
-		if (observation.getHeartRate() >= 110 && (observation.getWBCCount() < 3 || observation.getWBCCount() >= 15)) {
+		if (concept.getHeartRate() >= 110 && (concept.getWBCCount() < 3 || concept.getWBCCount() >= 15)) {
 			return true;
 		}
-		if (observation.getRespiratoryRate() > 24
-				&& (observation.getWBCCount() < 3 || observation.getWBCCount() >= 15)) {
+		if (concept.getRespiratoryRate() > 24 && (concept.getWBCCount() < 3 || concept.getWBCCount() >= 15)) {
 			return true;
 		}
 		return false;
 	}
 
 	// Determine if the patient is Unstable
-	public static boolean isUnStable(Observation observation) {
-		if (observation.getSystolicBloodPressure() < 90 || observation.getHeartRate() > 150
-				|| observation.getNeedForVasopressorSupport() || observation.getCardiacArrhythmia()) {
+	public static boolean isUnStable(Concept concept) {
+		if (concept.getSystolicBloodPressure() < 90 || concept.getHeartRate() > 150
+				|| concept.getNeedForVasopressorSupport() || concept.getCardiacArrhythmia()) {
 			return true;
 		}
 		return false;
 	}
 
 	// Determine the SOFAScore from Appendix B
-	public static Integer computeSOFAScore(Observation observation) {
+	public static Integer computeSOFAScore(Concept concept) {
 		int scoreRespiratoryPaOxyFiOxy = 0;
 		int scoreCoagulation = 0;
 		int scoreLiverBilirubin = 0;
 		int scoreCardiovascularHypotension = 0;
 		int scoreGlasgowComaScale = 0;
 		int scoreCreatinineorUrine = 0;
-		observation.setMap();
-		if (observation.getRespiratoryPaOxyFiOxy() >= 400) {
+		concept.setMap();
+		if (concept.getRespiratoryPaOxyFiOxy() >= 400) {
 			scoreRespiratoryPaOxyFiOxy = 0;
-		} else if (observation.getRespiratoryPaOxyFiOxy() >= 300 && observation.getRespiratoryPaOxyFiOxy() < 400) {
+		} else if (concept.getRespiratoryPaOxyFiOxy() >= 300 && concept.getRespiratoryPaOxyFiOxy() < 400) {
 			scoreRespiratoryPaOxyFiOxy = 1;
-		} else if (observation.getRespiratoryPaOxyFiOxy() >= 200 && observation.getRespiratoryPaOxyFiOxy() < 300) {
+		} else if (concept.getRespiratoryPaOxyFiOxy() >= 200 && concept.getRespiratoryPaOxyFiOxy() < 300) {
 			scoreRespiratoryPaOxyFiOxy = 2;
-		} else if (observation.getRespiratoryPaOxyFiOxy() >= 100 && observation.getRespiratoryPaOxyFiOxy() < 200) {
+		} else if (concept.getRespiratoryPaOxyFiOxy() >= 100 && concept.getRespiratoryPaOxyFiOxy() < 200) {
 			scoreRespiratoryPaOxyFiOxy = 3;
 		} else {
 			scoreRespiratoryPaOxyFiOxy = 4;
 		}
-		if (observation.getCoagulationPlatelets() >= 150) {
+		if (concept.getCoagulationPlatelets() >= 150) {
 			scoreCoagulation = 0;
-		} else if (observation.getCoagulationPlatelets() >= 100 && observation.getCoagulationPlatelets() < 150) {
+		} else if (concept.getCoagulationPlatelets() >= 100 && concept.getCoagulationPlatelets() < 150) {
 			scoreCoagulation = 1;
-		} else if (observation.getCoagulationPlatelets() >= 50 && observation.getCoagulationPlatelets() < 100) {
+		} else if (concept.getCoagulationPlatelets() >= 50 && concept.getCoagulationPlatelets() < 100) {
 			scoreCoagulation = 2;
-		} else if (observation.getCoagulationPlatelets() >= 20 && observation.getCoagulationPlatelets() < 50) {
+		} else if (concept.getCoagulationPlatelets() >= 20 && concept.getCoagulationPlatelets() < 50) {
 			scoreCoagulation = 3;
 		} else {
 			scoreCoagulation = 4;
 		}
-		if (observation.getLiverBilirubin() < 1.2) {
+		if (concept.getLiverBilirubin() < 1.2) {
 			scoreLiverBilirubin = 0;
-		} else if (observation.getLiverBilirubin() >= 1.2 && observation.getLiverBilirubin() <= 1.9) {
+		} else if (concept.getLiverBilirubin() >= 1.2 && concept.getLiverBilirubin() <= 1.9) {
 			scoreLiverBilirubin = 1;
-		} else if (observation.getLiverBilirubin() >= 2 && observation.getLiverBilirubin() <= 5.9) {
+		} else if (concept.getLiverBilirubin() >= 2 && concept.getLiverBilirubin() <= 5.9) {
 			scoreLiverBilirubin = 2;
-		} else if (observation.getLiverBilirubin() >= 6 && observation.getLiverBilirubin() <= 11.9) {
+		} else if (concept.getLiverBilirubin() >= 6 && concept.getLiverBilirubin() <= 11.9) {
 			scoreLiverBilirubin = 3;
 		} else {
 			scoreLiverBilirubin = 4;
 		}
-		if (observation.getMap() >= 70) {
+		if (concept.getMap() >= 70) {
 			scoreCardiovascularHypotension = 0;
 		} else {
 			scoreCardiovascularHypotension = 1;
 		}
-		if (observation.getDopamine() < 5 || observation.getAnyDoputamine()) {
+		if (concept.getDopamine() < 5 || concept.getAnyDoputamine()) {
 			scoreCardiovascularHypotension = 2;
-		} else if ((observation.getDopamine() >= 5.1 && observation.getDopamine() <= 15)
-				|| (observation.getEpinephrine() <= 0.1) || (observation.getNorepinephrine() <= 0.1)) {
+		} else if ((concept.getDopamine() >= 5.1 && concept.getDopamine() <= 15) || (concept.getEpinephrine() <= 0.1)
+				|| (concept.getNorepinephrine() <= 0.1)) {
 			scoreCardiovascularHypotension = 3;
 		} else {
 			scoreCardiovascularHypotension = 4;
 		}
-		if (observation.getGlasgowComaScale() == 15) {
+		if (concept.getGlasgowComaScale() == 15) {
 			scoreGlasgowComaScale = 0;
-		} else if (observation.getGlasgowComaScale() == 13 || observation.getGlasgowComaScale() == 14) {
+		} else if (concept.getGlasgowComaScale() == 13 || concept.getGlasgowComaScale() == 14) {
 			scoreGlasgowComaScale = 1;
-		} else if (observation.getGlasgowComaScale() >= 10 && observation.getGlasgowComaScale() <= 12) {
+		} else if (concept.getGlasgowComaScale() >= 10 && concept.getGlasgowComaScale() <= 12) {
 			scoreGlasgowComaScale = 2;
-		} else if (observation.getGlasgowComaScale() >= 6 && observation.getGlasgowComaScale() <= 9) {
+		} else if (concept.getGlasgowComaScale() >= 6 && concept.getGlasgowComaScale() <= 9) {
 			scoreGlasgowComaScale = 3;
-		} else if (observation.getGlasgowComaScale() < 6) {
+		} else if (concept.getGlasgowComaScale() < 6) {
 			scoreGlasgowComaScale = 4;
 		}
-		if (observation.getRenalCreatinine() < 1.2) {
+		if (concept.getRenalCreatinine() < 1.2) {
 			scoreCreatinineorUrine = 0;
-		} else if (observation.getRenalCreatinine() >= 1.2 && observation.getRenalCreatinine() <= 1.9) {
+		} else if (concept.getRenalCreatinine() >= 1.2 && concept.getRenalCreatinine() <= 1.9) {
 			scoreCreatinineorUrine = 1;
-		} else if (observation.getRenalCreatinine() >= 2 && observation.getRenalCreatinine() <= 3.4) {
+		} else if (concept.getRenalCreatinine() >= 2 && concept.getRenalCreatinine() <= 3.4) {
 			scoreCreatinineorUrine = 2;
 		}
-		if ((observation.getRenalCreatinine() >= 3.4 && observation.getRenalCreatinine() < 4.9)
-				|| (observation.getUrineOutput() < 500) && observation.getUrineOutput() >= 200) {
+		if ((concept.getRenalCreatinine() >= 3.4 && concept.getRenalCreatinine() < 4.9)
+				|| (concept.getUrineOutput() < 500) && concept.getUrineOutput() >= 200) {
 			scoreCreatinineorUrine = 3;
-		} else if (observation.getRenalCreatinine() >= 5 || observation.getUrineOutput() < 200) {
+		} else if (concept.getRenalCreatinine() >= 5 || concept.getUrineOutput() < 200) {
 			scoreCreatinineorUrine = 4;
 		}
 		return Math.min(scoreRespiratoryPaOxyFiOxy, Math.min(scoreCoagulation, Math.min(scoreLiverBilirubin,
@@ -135,8 +132,9 @@ public class SepsisDeterminationAlgorithm {
 	public static boolean organDysfunction(Patient patient) {
 		Observation currentObservation = patient.getCurrentObservation();
 		Observation lastObservation = patient.getLastObservation();
-
-		Integer SOFAScoreChange = Math.abs(computeSOFAScore(currentObservation) - computeSOFAScore(lastObservation));
+		Concept currentconcept = currentObservation.getConcept();
+		Concept lastconcept = lastObservation.getConcept();
+		Integer SOFAScoreChange = Math.abs(computeSOFAScore(currentconcept) - computeSOFAScore(lastconcept));
 		if (SOFAScoreChange >= 2) {
 			return true;
 		} else {
@@ -144,17 +142,17 @@ public class SepsisDeterminationAlgorithm {
 		}
 	}
 
-	public static boolean isInfection(Observation observation) {
-		if (observation.getInfectionSkinWound() || observation.getInfectionInvasiveDevice()
-				|| observation.getInfectionRecentSurgicalProcedure()) {
+	public static boolean isInfection(Concept concept) {
+		if (concept.getInfectionSkinWound() || concept.getInfectionInvasiveDevice()
+				|| concept.getInfectionRecentSurgicalProcedure()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public static boolean isSepsis(Patient patient, Observation observation) {
-		if (organDysfunction(patient) && isInfection(observation) && observation.getIsImmunocompromised()) {
+	public static boolean isSepsis(Patient patient, Concept concept) {
+		if (organDysfunction(patient) && isInfection(concept) && concept.getIsImmunocompromised()) {
 			return true;
 		} else {
 			return false;
@@ -164,26 +162,27 @@ public class SepsisDeterminationAlgorithm {
 	public static SepsisDetermination analyze(Patient patient) {
 		try {
 			Observation observation = patient.getCurrentObservation();
-			observation.setMap();
+			Concept concept = observation.getConcept();
+			concept.setMap();
 			if (isNotAdult(patient)) {
 				return SepsisDetermination.NON_ADULT;
-			} else if (observation.getIsPregnant()) {
+			} else if (concept.getIsPregnant()) {
 				return SepsisDetermination.PREGNANT_PATIENT;
-			} else if (decideSIRSCriteria(observation)) {
-				if (observation.getIsResponsive()) {
-					if (!isUnStable(observation)) {
-						if (!isSepsis(patient, observation)) {
+			} else if (decideSIRSCriteria(concept)) {
+				if (concept.getIsResponsive()) {
+					if (!isUnStable(concept)) {
+						if (!isSepsis(patient, concept)) {
 							return SepsisDetermination.CONTINUE_MONITORING;
 						}
 					}
-					if (observation.getMap() < 65) {
+					if (concept.getMap() < 65) {
 						return SepsisDetermination.SEPTIC_SHOCK;
 					} else {
 						return SepsisDetermination.SEPSIS;
 					}
 
 				} else {
-					if (observation.getIsInpatientStatus())
+					if (concept.getIsInpatientStatus())
 						return SepsisDetermination.CODE_BLUE;
 				}
 			}

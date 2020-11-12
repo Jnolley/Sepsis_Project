@@ -6,21 +6,18 @@ import java.util.ArrayList;
 
 public class Patient {
 	private ArrayList<Observation> observation = new ArrayList<Observation>();
-	private Integer birthDay;
-	private Integer birthMonth;
-	private Integer birthYear;
+	private LocalDate birthDate;
 
-	public Patient(ArrayList<Observation> observation, Integer birthDay, Integer birthMonth, Integer birthYear) {
+	public Patient(ArrayList<Observation> observation, LocalDate birthDate) {
 		super();
 		this.observation = observation;
-		this.birthDay = birthDay;
-		this.birthMonth = birthMonth;
-		this.birthYear = birthYear;
+		this.setBirthDate(birthDate);
 	}
 
 	public Observation getCurrentObservation() {
 		for (Observation observation : observation) {
-			Period period = Period.between(observation.getTime(), LocalDate.now());
+			LocalDate timestamp = observation.getTimestamp().toLocalDate();
+			Period period = Period.between(timestamp, LocalDate.now());
 			if (period.getDays() <= 1) {
 				return observation;
 			}
@@ -30,8 +27,8 @@ public class Patient {
 
 	public Observation getLastObservation() {
 		for (Observation observation : observation) {
-			LocalDate time = observation.getTime();
-			Period period = Period.between(observation.getTime(), LocalDate.now());
+			LocalDate timestamp = observation.getTimestamp().toLocalDate();
+			Period period = Period.between(timestamp, LocalDate.now());
 			if (period.getDays() > 1 && period.getDays() <= 2) {
 				return observation;
 			}
@@ -39,27 +36,13 @@ public class Patient {
 		return null;
 	}
 
-	public Integer getBirthDay() {
-		return birthDay;
+	public LocalDate getBirthDate() {
+		return birthDate;
 	}
 
-	public void setBirthDay(Integer birthDay) {
-		this.birthDay = birthDay;
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
 	}
 
-	public Integer getBirthMonth() {
-		return birthMonth;
-	}
-
-	public void setBirthMonth(Integer birthMonth) {
-		this.birthMonth = birthMonth;
-	}
-
-	public Integer getBirthYear() {
-		return birthYear;
-	}
-
-	public void setBirthYear(Integer birthYear) {
-		this.birthYear = birthYear;
-	}
+	
 }
