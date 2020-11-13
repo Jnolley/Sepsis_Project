@@ -23,10 +23,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-=======
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
->>>>>>> d6e73e8957846a72609ba9fa42306a888098170a
 	<classpathentry combineaccessrules="false" kind="src" path="/rest_connector"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -52,7 +52,7 @@ public class Patient {
 		Observation isPregnant = new Observation("isPregnant");
 		Observation temperature = new Observation("temperature");
 		Observation heartRate =  new Observation("heartRate");
-		Observation respiratoryRate =  new Observation("respiratoryRate"); // this is a calculated value we need to change
+		Observation respiratoryRate =  new Observation("respiratoryRate");
 		Observation wBCCount= new Observation("wBCCount");
 		Observation systolicBloodPressure= new Observation ("systolicBloodPressure");
 		Observation diastolicBloodPressure= new Observation ("diastolicBloodPressure");
@@ -65,7 +65,7 @@ public class Patient {
 		Observation infectionInvasiveDevice= new Observation("infectionInvasiveDevice");
 		Observation infectionRecentSurgicalProcedure= new Observation("infectionRecentSurgicalProcedure");
 		Observation isImmunocompromised= new Observation ("isImmunocompromised");
-		Observation respiratoryPaOxyFiOxy= new Observation ("respiratoryPaOxyFiOxy"); //check this one this one might also be calculated
+		Observation respiratoryPaOxyFiOxy= new Observation ("respiratoryPaOxyFiOxy"); 
 		Observation coagulationPlatelets= new Observation ("coagualtionPlatelets"); 
 		Observation liverBilirubin= new Observation ("liverBilirubin");
 		Observation dopamine= new Observation ("dopamine");
