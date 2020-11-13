@@ -5,17 +5,21 @@ import java.time.Period;
 import java.util.ArrayList;
 
 public class Patient {
-	private ArrayList<Observation> observation = new ArrayList<Observation>();
+	private ArrayList<Observation> observationList = new ArrayList<Observation>();
 	private LocalDate birthDate;
 
-	public Patient(ArrayList<Observation> observation, LocalDate birthDate) {
+	public Patient(ArrayList<Observation> observationList, LocalDate birthDate) {
 		super();
-		this.observation = observation;
+		this.observationList = observationList;
 		this.setBirthDate(birthDate);
 	}
 
+	public Patient() {
+		super();
+	}
+
 	public Observation getCurrentObservation() {
-		for (Observation observation : observation) {
+		for (Observation observation : observationList) {
 			LocalDate timestamp = observation.getTimestamp().toLocalDate();
 			Period period = Period.between(timestamp, LocalDate.now());
 			if (period.getDays() <= 1) {
@@ -26,7 +30,7 @@ public class Patient {
 	}
 
 	public Observation getLastObservation() {
-		for (Observation observation : observation) {
+		for (Observation observation : observationList) {
 			LocalDate timestamp = observation.getTimestamp().toLocalDate();
 			Period period = Period.between(timestamp, LocalDate.now());
 			if (period.getDays() > 1 && period.getDays() <= 2) {
@@ -43,6 +47,15 @@ public class Patient {
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
+	public void addAllValueToObservationList() {
+		Observation isPregnant = new Observation("isPregnant");
+		Observation temperature = new Observation("temperature");
+		Observation heartRate =  new Observation("heartRate");
+		Observation respiratoryRate =  new Observation("respiratoryRate");
+	}
 
-	
+	public ArrayList<Observation> getObservationList() {
+		return observationList;
+	}
+
 }

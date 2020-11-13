@@ -25,6 +25,11 @@ public class Concept {
 	private Double epinephrine;
 	private Double norepinephrine;
 	private Double glasgowComaScale;
+
+	public Concept() {
+		super();
+	}
+
 	private Double renalCreatinine;
 	private Double urineOutput;
 	private Double map;
@@ -278,6 +283,7 @@ public class Concept {
 	public Double getMap() {
 		return map;
 	}
+
 	public void setMap() {
 		this.map = (systolicBloodPressure - diastolicBloodPressure) / 3 + diastolicBloodPressure;
 	}

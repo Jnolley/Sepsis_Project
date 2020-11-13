@@ -9,6 +9,7 @@ import java.net.ProtocolException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -17,6 +18,31 @@ import edu.unl.cse.soft160.rest_connector.connector.OpenMRSConnection;
 import edu.unl.cse.soft160.rest_connector.connector.PatientRecord;
 
 public class SepesisDeterminationApp {
+
+	public Patient setValue(PatientRecord patientRecord, ObservationRecord observationRecord,
+			String needForVasopressorSupport, String isResponsive, String presenceOfCardiacArrhythmia,
+			String declineInBaselineStatus, Double baselineGlaslowScale, Double currentGlaslowScale) {
+		Patient patient = new Patient();
+		ArrayList<Observation> observationList = patient.getObservationList();
+		for (Observation observation: observationList ) {
+			 
+			 if (observation.getConcept() == "needForVasopressorSupport") {
+				observation.setBMeasurement(needForVasopressorSupport);
+			 }
+			 else if (observation.getConcept() == "needForVasopressorSupport") {
+				observation.setBMeasurement(isResponsive);
+			 }else if (observation.getConcept() == "presenceOfCardiacArrhythmia") {
+				observation.setBMeasurement(presenceOfCardiacArrhythmia);
+			 }else if(observation.getConcept() == "declineInBaselineStatus"){
+				observation.setBMeasurement(declineInBaselineStatus);
+			 }else if(observation.getConcept() == "baselineGlaslowScale") {
+				observation.setDMeasurement(baselineGlaslowScale);
+			 } else if(observation.getConcept() == "currentGlaslowScale") {
+				observation.setDMeasurement(currentGlaslowScale);
+			 }
+		}
+		return patient;
+	}
 
 	public static void main(String[] args) throws IOException {
 		String serverLocation = showInputDialog(null, "Enter server location");
@@ -31,6 +57,20 @@ public class SepesisDeterminationApp {
 				if (password == null) {
 					return;
 				} else {
+					String needForVasopressorSupport = showInputDialog(null,
+							"Does the patient need for vasopressor support?:(Y/N) ");
+
+					String isResponsive = showInputDialog(null, "Is the patient unresponsive?:(Y/N) ");
+
+					String presenceOfCardiacArrhythmia = showInputDialog(null,
+							"Does the patient have Cardiac Arrhythmia?:(Y/N) ");
+
+					String declineInBaselineStatus = showInputDialog(null,
+							"Does the patient have decline in baseline mental status?:(Y/N) ");
+
+					String baselineGlaslowScale = showInputDialog(null, "Enter baseline Glaslow Scale: ");
+
+					String currentGlaslowScale = showInputDialog(null, "Enter current Glaslow Scale: ");
 
 					try {
 						OpenMRSConnection connection = new OpenMRSConnection(serverLocation, username, password);
@@ -55,15 +95,7 @@ public class SepesisDeterminationApp {
 						System.out.println("  Location: " + patientRecord.getLocation());
 						for (ObservationRecord observationRecord : connection
 								.getObservationRecords(patientRecord.getUUID())) {
-							LocalDate timeStamp = observationRecord.getTimestamp().toLocalDate();
-							
-						}
-						for (ObservationRecord observationRecord : connection
-								.getObservationRecords(patientRecord.getUUID())) {
-							String suffix = observationRecord.getMeasurement() == null ? ""
-									: " = " + observationRecord.getMeasurement().toString();
-							System.out.println("  " + observationRecord.getTimestamp() + ": "
-									+ observationRecord.getConcept() + suffix);
+							System.out.println(observationRecord.getConcept());
 						}
 					} catch (ConnectException ex) {
 						JOptionPane.showMessageDialog(null, "Could not contact the server.");
