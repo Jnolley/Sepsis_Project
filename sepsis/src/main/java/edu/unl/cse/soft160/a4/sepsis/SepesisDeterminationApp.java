@@ -21,28 +21,70 @@ public class SepesisDeterminationApp {
 
 	public Patient setValue(PatientRecord patientRecord, ObservationRecord observationRecord,
 			String needForVasopressorSupport, String isResponsive, String presenceOfCardiacArrhythmia,
-			String declineInBaselineStatus, Double baselineGlaslowScale, Double currentGlaslowScale) {
+			String declineInBaselineStatus, Double baselineGlaslowScale, Double currentGlaslowScale,
+			Double systolicBloodPressure, Double wBCCount, Double diastolicBloodPressure, String isInpatientStatus,
+			String declineInBaselineMentalStatus, String infectionSkinWound, String infectionInvasiveDevice,
+			String infectionRecentSurgicalProcedure, String isImmunocompromised, Double respiratoryPaOxyFiOxy,
+			Double coagulationPlatelets, Double liverBilirubin, Double dopamine, Boolean anyDoputamine,
+			String epinephrine, Double norepinephrine, Double glasgowComaScale, String isPregnant, Double temperature,
+			Double heartRate, Double respiratoryRate) {
 		Patient patient = new Patient();
 		ArrayList<Observation> observationList = patient.getObservationList();
-		for (Observation observation: observationList ) {
-			 
-			 if (observation.getConcept() == "needForVasopressorSupport") {
+		for (Observation observation : observationList) {
+
+			if (observation.getConcept() == "needForVasopressorSupport") {
 				observation.setBMeasurement(needForVasopressorSupport);
-			 }
-			 else if (observation.getConcept() == "needForVasopressorSupport") {
+			} else if (observation.getConcept() == "isResponsive") {
 				observation.setBMeasurement(isResponsive);
-			 }else if (observation.getConcept() == "presenceOfCardiacArrhythmia") {
-				observation.setBMeasurement(presenceOfCardiacArrhythmia);
-			 }else if(observation.getConcept() == "declineInBaselineStatus"){
-				observation.setBMeasurement(declineInBaselineStatus);
-			 }else if(observation.getConcept() == "baselineGlaslowScale") {
+			}
+			} else if (observation.getConcept() == "baselineGlaslowScale") {
 				observation.setDMeasurement(baselineGlaslowScale);
-			 } else if(observation.getConcept() == "currentGlaslowScale") {
+			} else if (observation.getConcept() == "currentGlaslowScale") {
 				observation.setDMeasurement(currentGlaslowScale);
-			 }
-		}
-		return patient;
-	}
+			} else if (observation.getConcept() == "wBCCount") {
+				observation.setDMeasurement(wBCCount);
+			} else if (observation.getConcept() == "systolicBloodPressure") { // From OpenMRS in Vitals
+				observation.setDMeasurement(systolicBloodPressure);
+			} else if (observation.getConcept() == "diastolicBloodPressure") { // From OpenMRS in Vitals
+				observation.setDMeasurement(diastolicBloodPressure);
+			} else if (observation.getConcept() == "isInpatientStatus") { // From OpenMRS i think
+				observation.setBMeasurement(isInpatientStatus);
+			} else if (observation.getConcept() == "declineInBaselineMentalStatus") {
+				observation.setBMeasurement(declineInBaselineMentalStatus);
+			} else if (observation.getConcept() == "infectionSkinWound") {
+				observation.setBMeasurement(infectionSkinWound);
+			} else if (observation.getConcept() == "infectionInvasiveDevice") {
+				observation.setBMeasurement(infectionInvasiveDevice);
+			} else if (observation.getConcept() == "infectionRecentSurgicalProcedure") {
+				observation.setBMeasurement(infectionRecentSurgicalProcedure);
+			} else if (observation.getConcept() == "isImmunocompromised") {
+				observation.setBMeasurement(isImmunocompromised);
+			} else if (observation.getConcept() == "respiratoryPaOxyFiOxy") {
+				observation.setDMeasurement(respiratoryPaOxyFiOxy);
+			} else if (observation.getConcept() == "coagulationPlatelets") { // From OpenMRS Lab Report
+				observation.setDMeasurement(coagulationPlatelets);
+			} else if (observation.getConcept() == "liverBilirubin") { // From OpenMRS Lab Report
+				observation.setDMeasurement(liverBilirubin);
+			} else if (observation.getConcept() == "dopamine") {
+				observation.setDMeasurement(dopamine);
+			} else if (observation.getConcept() == "anyDoputamine") {
+				observation.setBMeasurement(anyDoputamine);
+			} else if (observation.getConcept() == "epinephrine") {
+				observation.setDMeasurement(epinephrine);
+			} else if (observation.getConcept() == "norepinephrine") {
+				observation.setDMeasurement(norepinephrine);
+			} else if (observation.getConcept() == "isPregnant") {
+				observation.setBMeasurement(isPregnant);
+			} else if (observation.getConcept() == "temperature") { //From OpenMRS in Vitals
+				observation.setDMeasurement(temperature);
+			} else if (observation.getConcept() == "heartRate") { //From OpenMRS in Vitals
+				observation.setDMeasurement(heartRate);
+			} else if (observation.getConcept() == "respiratoryRate") { //From OpenMRS in Vitals
+				observation.setDMeasurement(respiratoryRate);
+			} else if (observation.getConcept() == "glasgowComaScale") {
+				observation.setDMeasurement(glasgowComaScale);
+			}
+		}return patient;
 
 	public static void main(String[] args) throws IOException {
 		String serverLocation = showInputDialog(null, "Enter server location");
