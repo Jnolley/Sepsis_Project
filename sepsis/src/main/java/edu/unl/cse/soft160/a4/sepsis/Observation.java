@@ -32,12 +32,18 @@ public class Observation {
 		return concept;
 	}
 
-	public void setConcept(String concept) {
-		this.concept = concept;
-	}
-
 	public Double getDMeasurement() {
 		return DMeasurement;
+	}
+
+	public String getMeasurement() {
+		if (DMeasurement != null || BMeasurement == null) {
+			return String.valueOf(DMeasurement);
+		} else if (BMeasurement) {
+			return "Yes";
+		} else {
+			return "No";
+		}
 	}
 
 	public void setDMeasurement(Double DMeasurement) {
@@ -48,16 +54,7 @@ public class Observation {
 		return BMeasurement;
 	}
 
-	public void setBMeasurement(String BMeasurement) {
-		this.BMeasurement = convertStringToBoolean(BMeasurement);
-	}
-
-	public static Boolean convertStringToBoolean(String answer) {
-		if (answer == "Y") {
-			return true;
-		} else if (answer == "N") {
-			return false;
-		} else
-			return null;
+	public void setBMeasurement(Boolean BMeasurement) {
+		this.BMeasurement = BMeasurement;
 	}
 }

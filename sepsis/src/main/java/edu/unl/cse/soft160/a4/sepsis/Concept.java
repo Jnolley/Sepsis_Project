@@ -2,12 +2,12 @@ package edu.unl.cse.soft160.a4.sepsis;
 
 public class Concept {
 	private Boolean isPregnant;
-	private Double temperature;
+	private Double temperature;//
 	private Double heartRate;
-	private Double respiratoryRate;
+	private Double respiratoryRate;//
 	private Double wBCCount;
-	private Double systolicBloodPressure;
-	private Double diastolicBloodPressure;
+	private Double systolicBloodPressure;//
+	private Double diastolicBloodPressure;//
 	private Boolean isInpatientStatus;
 	private Boolean needForVasopressorSupport;
 	private Boolean isResponsive;
@@ -24,14 +24,14 @@ public class Concept {
 	private Boolean anyDoputamine;
 	private Double epinephrine;
 	private Double norepinephrine;
-	private Double glasgowComaScale;
+	private Double GlasgowComaScale;
 
 	public Concept() {
 		super();
 	}
 
-	private Double renalCreatinine;
-	private Double urineOutput;
+	private Double renalCreatinine;//
+	private Double urineOutput;//
 	private Double map;
 
 	public Concept(Boolean isPregnant, Double temperature, Double heartRate, Double respiratoryRate, Double wBCCount,
@@ -40,7 +40,7 @@ public class Concept {
 			Boolean declineInBaselineMentalStatus, Boolean infectionSkinWound, Boolean infectionInvasiveDevice,
 			Boolean infectionRecentSurgicalProcedure, Boolean isImmunocompromised, Double respiratoryPaOxyFiOxy,
 			Double coagulationPlatelets, Double liverBilirubin, Double dopamine, Boolean anyDoputamine,
-			Double epinephrine, Double norepinephrine, Double glasgowComaScale, Double renalCreatinine,
+			Double epinephrine, Double norepinephrine, Double baselineGlasgowComaScale, Double renalCreatinine,
 			Double urineOutput) {
 		super();
 		this.isPregnant = isPregnant;
@@ -66,7 +66,7 @@ public class Concept {
 		this.anyDoputamine = anyDoputamine;
 		this.epinephrine = epinephrine;
 		this.norepinephrine = norepinephrine;
-		this.glasgowComaScale = glasgowComaScale;
+		this.GlasgowComaScale = GlasgowComaScale;
 		this.renalCreatinine = renalCreatinine;
 		this.urineOutput = urineOutput;
 		this.map = (systolicBloodPressure - diastolicBloodPressure) / 3 + diastolicBloodPressure;
@@ -257,11 +257,11 @@ public class Concept {
 	}
 
 	public Double getGlasgowComaScale() {
-		return glasgowComaScale;
+		return GlasgowComaScale;
 	}
 
-	public void setGlasgowComaScale(Double glasgowComaScale) {
-		this.glasgowComaScale = glasgowComaScale;
+	public void setGlasgowComaScale(Double GlasgowComaScale) {
+		this.GlasgowComaScale = GlasgowComaScale;
 	}
 
 	public Double getRenalCreatinine() {
@@ -287,4 +287,5 @@ public class Concept {
 	public void setMap() {
 		this.map = (systolicBloodPressure - diastolicBloodPressure) / 3 + diastolicBloodPressure;
 	}
+
 }

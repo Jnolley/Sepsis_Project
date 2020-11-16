@@ -1,20 +1,112 @@
 package edu.unl.cse.soft160.a4.sepsis;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import edu.unl.cse.soft160.rest_connector.connector.ObservationRecord;
+import edu.unl.cse.soft160.rest_connector.connector.OpenMRSConnection;
+import edu.unl.cse.soft160.rest_connector.connector.PatientRecord;
 
 // Harry Do
 
 public class SepsisDeterminationAlgorithm {
-	public static Boolean isNotAdult(Patient patient) {
-		LocalDate birthDate = patient.getBirthDate();
-		LocalDate currentDate = LocalDate.now();
-		Period diff = Period.between(birthDate, currentDate);
-		return (diff.getYears() < 18);
+	public static Set<Observation> getCurrentObservationList(Set<Observation> observationList) {
+		Set<Observation> currentObservationList = new HashSet<Observation>();
+		for (Observation observation : observationList) {
+			LocalDate timestamp = observation.getTimestamp().toLocalDate();
+			Period time = Period.between(timestamp, LocalDate.now());
+			if (time.getDays() <= 1 && !observation.getConcept().equals("Baseline Glasgow Coma Scale")) {
+				currentObservationList.add(observation);
+			}
+		}
+		return currentObservationList;
 	}
 
-	public static boolean decideSIRSCriteria(Double temperature,Double heartRate, Double respiratoryRate, Doble wBCCount) {
+	public static Set<Observation> getBaselineObservationList(Set<Observation> observationList) {
+		Set<Observation> baselineObservationList = new HashSet<Observation>();
+		for (Observation observation : observationList) {
+			LocalDate timestamp = observation.getTimestamp().toLocalDate();
+			Period time = Period.between(timestamp, LocalDate.now());
+			if (time.getDays() > 1 && time.getDays() <= 2
+					&& !observation.getConcept().equals("Current Glasgow Coma Scale")) {
+				baselineObservationList.add(observation);
+			}
+		}
+		return baselineObservationList;
+	}
+
+	public static Concept setUpConceptList(Set<Observation> observationList) {
+		Concept concepts = new Concept();
+		for (Observation observation : observationList) {
+			if (observation.getConcept().equals("Is Pregnant")) {
+				concepts.setIsPregnant(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Temperature")) {
+				concepts.setTemperature(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Heart rate")) {
+				concepts.setHeartRate(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Respiratory rate")) {
+				concepts.setRespiratoryRate(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("WBCCount")) {
+				concepts.setWBCCount(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Systolic blood pressure")) {
+				concepts.setSystolicBloodPressure(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Diastolic blood pressure")) {
+				concepts.setDiastolicBloodPressure(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Is Inpatient Status")) {
+				concepts.setIsInpatientStatus(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Need For Vasopressor Support")) {
+				concepts.setNeedForVasopressorSupport(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Is responsive")) {
+				concepts.setIsResponsive(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Cardiac arrhythmia")) {
+				concepts.setCardiacArrhythmia(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Decline in baseline mental status")) {
+				concepts.setDeclineInBaselineMentalStatus(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Infection Skin Wound")) {
+				concepts.setInfectionSkinWound(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Infection Invasive Device")) {
+				concepts.setInfectionInvasiveDevice(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Infection Recent Surgical Procedure")) {
+				concepts.setInfectionRecentSurgicalProcedure(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("is Immunocompromised")) {
+				concepts.setIsImmunocompromised(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Respiratory PaOxy/FiOxy")) {
+				concepts.setRespiratoryPaOxyFiOxy(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Coagulation Platelets")) {
+				concepts.setCoagulationPlatelets(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Liver Bilirubin")) {
+				concepts.setLiverBilirubin(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Dopamine")) {
+				concepts.setDopamine(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Using Any Doputamine?")) {
+				concepts.setAnyDoputamine(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Epinephrine")) {
+				concepts.setEpinephrine(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Norepinephrine")) {
+				concepts.setNorepinephrine(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Current Glasgow Coma Scale")) {
+				concepts.setGlasgowComaScale(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Baseline Glasgow Coma Scale")) {
+				concepts.setGlasgowComaScale(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Creatinine in Blood (mg/dL)")) {
+				concepts.setRenalCreatinine(observation.getDMeasurement());
+			}
+		}
+		return concepts;
+	}
+
+	public static Boolean isNotAdult(PatientRecord patientRecord) {
+		LocalDateTime now = LocalDateTime.now();
+		Period age = Period.between(patientRecord.getBirthDate(), now.toLocalDate());
+		return (age.getYears() < 18);
+	}
+
+	public static boolean decideSIRSCriteria(Concept concept) {
 		if ((concept.getTemperature() < 36 || concept.getTemperature() > 38.5) && concept.getHeartRate() >= 110) {
 			return true;
 		}
@@ -129,12 +221,8 @@ public class SepsisDeterminationAlgorithm {
 				Math.min(scoreCardiovascularHypotension, Math.min(scoreGlasgowComaScale, scoreCreatinineorUrine)))));
 	}
 
-	public static boolean organDysfunction(Patient patient) {
-		Observation currentObservation = patient.getCurrentObservation();
-		Observation lastObservation = patient.getLastObservation();
-		Concept currentconcept = currentObservation.getConcept();
-		Concept lastconcept = lastObservation.getConcept();
-		Integer SOFAScoreChange = Math.abs(computeSOFAScore(currentconcept) - computeSOFAScore(lastconcept));
+	public static boolean organDysfunction(Concept currentconcept, Concept baselineConcepts) {
+		Integer SOFAScoreChange = Math.abs(computeSOFAScore(currentconcept) - computeSOFAScore(baselineConcepts));
 		if (SOFAScoreChange >= 2) {
 			return true;
 		} else {
@@ -151,93 +239,46 @@ public class SepsisDeterminationAlgorithm {
 		}
 	}
 
-	public static boolean isSepsis(Patient patient, Concept concept) {
-		if (organDysfunction(patient) && isInfection(concept) && concept.getIsImmunocompromised()) {
+	public static boolean isSepsis(Concept currentConcept, Concept baselineConcepts) {
+		if (organDysfunction(currentConcept, baselineConcepts) && isInfection(currentConcept)
+				&& currentConcept.getIsImmunocompromised()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-
-
-	public static SepsisDetermination analyze(Patient patient) {
+	public static SepsisDetermination analyze(Set<Observation> observationList, PatientRecord patient) {
 		try {
-			ArrayList<Observation> observationList = patient.getObservationList();
-			for (Observation observation: observationList) {
-				if (observation.getConcept()=="isPregant") {
-					Boolean = observation.getBMeasurement();
-				} else if(observation.getConcept()=="temperature") {
-					Double temperature = observation.getDMeasurement();
-				} else if(observation.getConcept()=="heartRate") {
-					Double heartRate = observation.getDMeasurement();
-				} else if(observation.getConcept()=="respiratoryRate") {
-					Double respiratoryRate = observation.getDMeasurement();
-				} else if(observation.getConcept()=="wBCCount") {
-					Double wBCCount = observation.getDMeasurement();
-				} else if(observation.getConcept()=="systolicBloodPressure") {
-					Double systolicBloodPressure = observation.getDMeasurement();
-				} else if(observation.getConcept()=="diastolicBloodPressure") {
-					Double diastolicBloodPressure = observation.getDMeasurement();
-				} else if(observation.getConcept()=="isInpatientStatus") {
-					Double isInpatientStatus = observation.getDMeasurement();
-				} else if(observation.getConcept()=="needForVasopressorSupport") {
-					Double needForVasopressorSupport = observation.getDMeasurement();
-				} else if(observation.getConcept()=="isResponsive") {
-					Double isResponsive = observation.getDMeasurement();
-				} else if(observation.getConcept()=="cardiacArrhythmia") {
-					Double cardiacArrhythmia = observation.getDMeasurement();
-				} else if(observation.getConcept()=="declineInBaselineMentalStatus") {
-					Double declineInBaselineMentalStatus = observation.getDMeasurement();
-				} else if(observation.getConcept()=="infectionSkinWound") {
-					Double infectionSkinWound = observation.getDMeasurement();
-				} else if(observation.getConcept()=="infectionInvasiveDevice") {
-					Double infectionInvasiveDevice = observation.getDMeasurement();
-				} else if(observation.getConcept()=="infectionRecentSurgicalProcedure") {
-					Double infectionRecentSurgicalProcedure = observation.getDMeasurement();
-				} else if(observation.getConcept()=="isImmunocompromised") {
-					Double isImmunocompromised = observation.getDMeasurement();
-				} else if(observation.getConcept()=="respiratoryPaOxyFiOxy") {
-					Double respiratoryPaOxyFiOxy = observation.getDMeasurement();
-				} else if(observation.getConcept()=="coagualtionPlatelets") {
-					Double coagualtionPlatelets = observation.getDMeasurement();
-				} else if(observation.getConcept()=="liverBilirubin") {
-					Double liverBilirubin = observation.getDMeasurement();
-				} else if(observation.getConcept()=="dopamine") {
-					Double dopamine = observation.getDMeasurement();
-				} else if(observation.getConcept()=="anyDoputamine") {
-					Double anyDoputamine = observation.getDMeasurement();
-				} else if(observation.getConcept()=="epinephrine") {
-					Double epinephrine = observation.getDMeasurement();
-				} else if(observation.getConcept()=="norepinephrine") {
-					Double norepinephrine = observation.getDMeasurement();
-				} else if(observation.getConcept()=="galsgowComaScale") {
-					Double galsgowComaScale = observation.getDMeasurement();
-			}
+			Set<Observation> currentObservationList = getCurrentObservationList(observationList);
+			Set<Observation> baselineObservationList = getBaselineObservationList(observationList);
+			Concept currentConcepts = setUpConceptList(currentObservationList);
+			Concept baselineConcepts = setUpConceptList(baselineObservationList);
+			currentConcepts.setMap();
 			if (isNotAdult(patient)) {
 				return SepsisDetermination.NON_ADULT;
-			} else if (concept.getIsPregnant()) {
+			} else if (currentConcepts.getIsPregnant()) {
 				return SepsisDetermination.PREGNANT_PATIENT;
-			} else if (decideSIRSCriteria(concept)) {
-				if (concept.getIsResponsive()) {
-					if (!isUnStable(concept)) {
-						if (!isSepsis(patient, concept)) {
+			} else if (decideSIRSCriteria(currentConcepts)) {
+				if (currentConcepts.getIsResponsive()) {
+					if (!isUnStable(currentConcepts)) {
+						if (!isSepsis(currentConcepts, baselineConcepts)) {
 							return SepsisDetermination.CONTINUE_MONITORING;
 						}
 					}
-					if (concept.getMap() < 65) {
+					if (currentConcepts.getMap() < 65) {
 						return SepsisDetermination.SEPTIC_SHOCK;
 					} else {
 						return SepsisDetermination.SEPSIS;
 					}
+				} else if (currentConcepts.getIsInpatientStatus()) {
+					return SepsisDetermination.CODE_BLUE;
 
-				} else {
-					if (concept.getIsInpatientStatus())
-						return SepsisDetermination.CODE_BLUE;
 				}
 			}
 			return SepsisDetermination.INDETERMINATE;
-		} catch (Exception e) {
+
+		} catch (NullPointerException e) {
 			return SepsisDetermination.INDETERMINATE;
 		}
 	}
