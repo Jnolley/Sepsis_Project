@@ -39,8 +39,7 @@ public class Concept {
 			Boolean declineInBaselineMentalStatus, Boolean infectionSkinWound, Boolean infectionInvasiveDevice,
 			Boolean infectionRecentSurgicalProcedure, Boolean isImmunocompromised, Double respiratoryPaOxyFiOxy,
 			Double coagulationPlatelets, Double liverBilirubin, Double dopamine, Boolean anyDoputamine,
-			Double epinephrine, Double norepinephrine, Double baselineGlasgowComaScale, Double renalCreatinine,
-			Double urineOutput) {
+			Double epinephrine, Double norepinephrine, Double GlasgowComaScale, Double renalCreatinine) {
 		super();
 		this.isPregnant = isPregnant;
 		this.temperature = temperature;
