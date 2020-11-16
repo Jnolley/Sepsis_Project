@@ -38,7 +38,7 @@ public class Observation {
 
 	public String getMeasurement() {
 		if (BMeasurement == null && DMeasurement == null) {
-			return "N/A";
+			return null;
 		} else if (DMeasurement != null || BMeasurement == null) {
 			return String.valueOf(DMeasurement);
 		} else if (BMeasurement) {

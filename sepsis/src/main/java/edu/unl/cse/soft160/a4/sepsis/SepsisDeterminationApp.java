@@ -28,6 +28,24 @@ public class SepsisDeterminationApp {
 			return null;
 	}
 
+	public static boolean isNumeric(String str) {
+		try {
+			Double.parseDouble(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
+	public static boolean isInt(String str) {
+		try {
+			Integer.parseInt(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
 	public static void setUpObservationList(Set<ObservationRecord> observationRecordList,
 			Set<Observation> currentObservationList, Set<Observation> baselineObservationList) {
 		for (ObservationRecord observationRecord : observationRecordList) {
@@ -70,94 +88,164 @@ public class SepsisDeterminationApp {
 			}
 		}
 		String isPregnant = showInputDialog(null, "Is the patient pregnant? (Y/N): ");
+		while (!isPregnant.equals("Y") && !isPregnant.equals("N")) {
+			isPregnant = showInputDialog(null, "Is the patient pregnant? (Y/N): ");
+		}
 		Observation isPregnant1 = new Observation(LocalDateTime.now(), "Is Pregnant", toBoolean(isPregnant));
 		currentObservationList.add(isPregnant1);
 		String needForVasopressorSupport = showInputDialog(null,
 				"Does the patient need for vasopressor support?(Y/N): ");
+		while (!needForVasopressorSupport.equals("Y") && !needForVasopressorSupport.equals("N")) {
+			needForVasopressorSupport = showInputDialog(null, "Does the patient need for vasopressor support?(Y/N): ");
+		}
 		Observation needForVasopressorSupport1 = new Observation(LocalDateTime.now(), "Need For Vasopressor Support",
 				toBoolean(needForVasopressorSupport));
 		currentObservationList.add(needForVasopressorSupport1);
 		String isInpatientStatus = showInputDialog(null, "Is the patient's status inpatient status?(Y/N): ");
+		while (!isInpatientStatus.equals("Y") && !isInpatientStatus.equals("N")) {
+			isInpatientStatus = showInputDialog(null, "Is the patient's status inpatient status?(Y/N): ");
+		}
 		Observation isInpatientStatus1 = new Observation(LocalDateTime.now(), "Is Inpatient Status",
 				toBoolean(isInpatientStatus));
 		currentObservationList.add(isInpatientStatus1);
 		String isResponsive = showInputDialog(null, "Is the patient responsive?(Y/N): ");
+		while (!isResponsive.equals("Y") && !isResponsive.equals("N")) {
+			isResponsive = showInputDialog(null, "Is the patient responsive?(Y/N): ");
+		}
 		Observation isResponsive1 = new Observation(LocalDateTime.now(), "Is responsive", toBoolean(isResponsive));
 		currentObservationList.add(isResponsive1);
 		String cardiacArrhythmia = showInputDialog(null, "Does the patient have cardiac arrhythmia?(Y/N): ");
+		while (!cardiacArrhythmia.equals("Y") && !cardiacArrhythmia.equals("N")) {
+			cardiacArrhythmia = showInputDialog(null, "Does the patient have cardiac arrhythmia?(Y/N): ");
+		}
 		Observation cardiacArrhythmia1 = new Observation(LocalDateTime.now(), "Cardiac arrhythmia",
 				toBoolean(cardiacArrhythmia));
 		currentObservationList.add(cardiacArrhythmia1);
 		String declineInBaselineMentalStatus = showInputDialog(null,
-				"Does the patient has decline in baseline mental status?(Y/N): ");
+				"Does the patient have decline in baseline mental status?(Y/N): ");
+		while (!declineInBaselineMentalStatus.equals("Y") && !declineInBaselineMentalStatus.equals("N")) {
+			declineInBaselineMentalStatus = showInputDialog(null,
+					"Does the patient have decline in baseline mental status?(Y/N): ");
+		}
 		Observation declineInBaselineMentalStatus1 = new Observation(LocalDateTime.now(),
 				"Decline in baseline mental status", toBoolean(declineInBaselineMentalStatus));
 		currentObservationList.add(declineInBaselineMentalStatus1);
 		String infectionSkinWound = showInputDialog(null, "Does the patient has infection skin wound?(Y/N): ");
+		while (!infectionSkinWound.equals("Y") && !infectionSkinWound.equals("N")) {
+			infectionSkinWound = showInputDialog(null, "Does the patient has infection skin wound?(Y/N): ");
+		}
 		Observation infectionSkinWound1 = new Observation(LocalDateTime.now(), "Infection Skin Wound",
 				toBoolean(infectionSkinWound));
 		currentObservationList.add(infectionSkinWound1);
 		String infectionInvasiveDevice = showInputDialog(null,
 				"Does the patient has infection invasive device?(Y/N): ");
+		while (!infectionInvasiveDevice.equals("Y") && !infectionInvasiveDevice.equals("N")) {
+			infectionInvasiveDevice = showInputDialog(null, "Does the patient has infection invasive device?(Y/N): ");
+		}
 		Observation infectionInvasiveDevice1 = new Observation(LocalDateTime.now(), "Infection Invasive Device",
 				toBoolean(infectionInvasiveDevice));
 		currentObservationList.add(infectionInvasiveDevice1);
 		String infectionRecentSurgicalProcedure = showInputDialog(null,
 				"Does the patient has infection of recent surgical procedure?(Y/N): ");
+		while (!infectionRecentSurgicalProcedure.equals("Y") && !infectionRecentSurgicalProcedure.equals("N")) {
+			infectionRecentSurgicalProcedure = showInputDialog(null,
+					"Does the patient has infection of recent surgical procedure?(Y/N): ");
+		}
 		Observation infectionRecentSurgicalProcedure1 = new Observation(LocalDateTime.now(),
 				"Infection Recent Surgical Procedure", toBoolean(infectionRecentSurgicalProcedure));
 		currentObservationList.add(infectionRecentSurgicalProcedure1);
 		String isImmunocompromised = showInputDialog(null, "Is the patient immunocompromised?(Y/N): ");
+		while (!isImmunocompromised.equals("Y") && !isImmunocompromised.equals("N")) {
+			isImmunocompromised = showInputDialog(null, "Is the patient immunocompromised?(Y/N): ");
+		}
 		Observation isImmunocompromised1 = new Observation(LocalDateTime.now(), "is Immunocompromised",
 				toBoolean(isImmunocompromised));
 		currentObservationList.add(isImmunocompromised1);
 		String baselineRespiratoryPaOxyFiOxy = showInputDialog(null,
 				"What is the patient's baseline respiratory PaOxy/FiOxy? (): ");
+		while (!isNumeric(baselineRespiratoryPaOxyFiOxy)) {
+			baselineRespiratoryPaOxyFiOxy = showInputDialog(null,
+					"What is the patient's baseline respiratory PaOxy/FiOxy? (): ");
+		}
 		Observation baselineRespiratoryPaOxyFiOxy1 = new Observation(LocalDateTime.now(),
 				"Baseline Respiratory PaOxy/FiOxy", Double.parseDouble(baselineRespiratoryPaOxyFiOxy));
 		baselineObservationList.add(baselineRespiratoryPaOxyFiOxy1);
 		String currentRespiratoryPaOxyFiOxy = showInputDialog(null,
 				"What is the patient's current respiratory PaOxy/FiOxy? (): ");
+		while (!isNumeric(currentRespiratoryPaOxyFiOxy)) {
+			currentRespiratoryPaOxyFiOxy = showInputDialog(null,
+					"What is the patient's current respiratory PaOxy/FiOxy? (): ");
+		}
 		Observation currentRespiratoryPaOxyFiOxy1 = new Observation(LocalDateTime.now(),
 				"Current Respiratory PaOxy/FiOxy", Double.parseDouble(currentRespiratoryPaOxyFiOxy));
 		currentObservationList.add(currentRespiratoryPaOxyFiOxy1);
 		String baselineDopamine = showInputDialog(null, "What is the patient's baseline use of dopamine? (): ");
+		while (!isNumeric(baselineDopamine)) {
+			baselineDopamine = showInputDialog(null, "What is the patient's baseline use of dopamine? (): ");
+		}
 		Observation baselineDopamine1 = new Observation(LocalDateTime.now(), "Baseline Dopamine",
 				Double.parseDouble(baselineDopamine));
 		baselineObservationList.add(baselineDopamine1);
 		String currentDopamine = showInputDialog(null, "What is the patient's current use of dopamine? (): ");
+		while (!isNumeric(currentDopamine)) {
+			currentDopamine = showInputDialog(null, "What is the patient's current use of dopamine? (): ");
+		}
 		Observation currentDopamine1 = new Observation(LocalDateTime.now(), "Current Dopamine",
 				Double.parseDouble(currentDopamine));
 		currentObservationList.add(currentDopamine1);
 		String baselineAnyDoputamine = showInputDialog(null, "Does the patient use any doputamine yesterday?(Y/N): ");
+		while (!baselineAnyDoputamine.equals("Y") && !baselineAnyDoputamine.equals("N")) {
+			baselineAnyDoputamine = showInputDialog(null, "Does the patient use any doputamine yesterday?(Y/N): ");
+		}
 		Observation baselineAnyDoputamine1 = new Observation(LocalDateTime.now(), "Using Any Doputamine Baseline",
 				toBoolean(baselineAnyDoputamine));
 		baselineObservationList.add(baselineAnyDoputamine1);
 		String currentAnyDoputamine = showInputDialog(null, "Does the patient use any doputamine currently?(Y/N): ");
+		while (!currentAnyDoputamine.equals("Y") && !currentAnyDoputamine.equals("N")) {
+			currentAnyDoputamine = showInputDialog(null, "Does the patient use any doputamine currently?(Y/N):");
+		}
 		Observation currentAnyDoputamine1 = new Observation(LocalDateTime.now(), "Using Any Doputamine Currently",
 				toBoolean(currentAnyDoputamine));
 		currentObservationList.add(currentAnyDoputamine1);
 		String baselineEpinephrine = showInputDialog(null, "What is the patient's baseline epinephrine? (): ");
+		while (!isNumeric(baselineEpinephrine)) {
+			baselineEpinephrine = showInputDialog(null, "What is the patient's baseline epinephrine? (): ");
+		}
 		Observation baselineEpinephrine1 = new Observation(LocalDateTime.now(), "Baseline Epinephrine",
 				Double.parseDouble(baselineEpinephrine));
 		baselineObservationList.add(baselineEpinephrine1);
-		String currentEpinephrine = showInputDialog(null, "What is the patient's epinephrine? (): ");
+		String currentEpinephrine = showInputDialog(null, "What is the patient's current epinephrine? (): ");
+		while (!isNumeric(currentEpinephrine)) {
+			currentEpinephrine = showInputDialog(null, "What is the patient's current epinephrine? (): ");
+		}
 		Observation currentEpinephrine1 = new Observation(LocalDateTime.now(), "Current Epinephrine",
 				Double.parseDouble(currentEpinephrine));
 		currentObservationList.add(currentEpinephrine1);
 		String baselineNorepinephrine = showInputDialog(null, "What is the patient's baseline norepinephrine? (): ");
+		while (!isNumeric(baselineNorepinephrine)) {
+			baselineNorepinephrine = showInputDialog(null, "What is the patient's baseline norepinephrine? (): ");
+		}
 		Observation baselineNorepinephrine1 = new Observation(LocalDateTime.now(), "Baseline Norepinephrine",
 				Double.parseDouble(baselineNorepinephrine));
 		baselineObservationList.add(baselineNorepinephrine1);
 		String currentNorepinephrine = showInputDialog(null, "What is the patient's cureent norepinephrine? (): ");
+		while (!isNumeric(currentNorepinephrine)) {
+			currentNorepinephrine = showInputDialog(null, "What is the patient's cureent norepinephrine? (): ");
+		}
 		Observation currentNorepinephrine1 = new Observation(LocalDateTime.now(), "Current Norepinephrine",
 				Double.parseDouble(currentNorepinephrine));
 		currentObservationList.add(currentNorepinephrine1);
 		String baseGlasgowComaScale = showInputDialog(null, "What is the patient's baseline glasgowComaScale? (): ");
+		while (!isNumeric(baseGlasgowComaScale)) {
+			baseGlasgowComaScale = showInputDialog(null, "What is the patient's baseline glasgowComaScale? (): ");
+		}
 		Observation baseGlasgowComaScale1 = new Observation(LocalDateTime.now(), "Baseline Glasgow Coma Scale",
 				Double.parseDouble(baseGlasgowComaScale));
 		baselineObservationList.add(baseGlasgowComaScale1);
 		String currentGlasgowComaScale = showInputDialog(null, "What is the patient's current glasgowComaScale? (): ");
+		while (!isNumeric(currentGlasgowComaScale)) {
+			currentGlasgowComaScale = showInputDialog(null, "What is the patient's current glasgowComaScale? (): ");
+		}
 		Observation currentGlasgowComaScale1 = new Observation(LocalDateTime.now(), "Current Glasgow Coma Scale",
 				Double.parseDouble(currentGlasgowComaScale));
 		currentObservationList.add(currentGlasgowComaScale1);
@@ -293,49 +381,85 @@ public class SepsisDeterminationApp {
 	}
 
 	public static void main(String[] args) throws IOException {
+
 		/*
 		 * String serverLocation = showInputDialog(null, "Enter server location"); if
 		 * (serverLocation == null) { return; } else { String username =
 		 * showInputDialog(null, "Enter username: "); if (username == null) { return; }
 		 * else { String password = showInputDialog(null, "Enter password: "); if
 		 * (password == null) { return; } try { OpenMRSConnection connection = new
-		 * OpenMRSConnection(serverLocation, username, password); String patientID =
-		 * showInputDialog(null, "Enter patientID: "); if (patientID == null) { return;
-		 * } PatientRecord patientRecord = connection.getPatientRecord(patientID); if
-		 * (patientRecord == null) { JOptionPane.showMessageDialog(null, "Patient" +
-		 * patientID + " does not exist."); return; }
-		 * JOptionPane.showMessageDialog(null, "Patient" + patientID + " exists.");
-		 * LocalDateTime now = LocalDateTime.now(); Period age =
-		 * Period.between(patientRecord.getBirthDate(), now.toLocalDate());
-		 * System.out.println("  Time Reported: " + now.toString());
-		 * System.out.println("  PatientID: " + patientID); System.out.println(
-		 * "  Patient Name: " + patientRecord.getFamilyName() + " " +
-		 * patientRecord.getGivenName()); System.out.println("  Age: " + age.getYears()
-		 * + " years " + age.getMonths() + " months " + age.getDays() + " days");
-		 * System.out.println("  Location: " + patientRecord.getLocation());
+		 * OpenMRSConnection(serverLocation, username, password);
 		 */
 		OpenMRSConnection connection = new OpenMRSConnection("localhost:8080", "admin", "Admin123");
-		String patientID = "10000X";
-		PatientRecord patientRecord = connection.getPatientRecord(patientID);
-		Set<Observation> currentObservationList = new HashSet<Observation>();
-		Set<Observation> baselineObservationList = new HashSet<Observation>();
-		setUpObservationList(connection.getObservationRecords(patientRecord.getUUID()), currentObservationList,
-				baselineObservationList);
-		for (ObservationRecord observation : connection.getObservationRecords(patientRecord.getUUID())) {
-			System.out.println(
-					observation.getTimestamp() + ": " + observation.getConcept() + ": " + observation.getMeasurement());
-		}
-		Concept currentConcepts = setUpCurrentConceptList(currentObservationList);
-		Concept baselineConcepts = setUpBaselineConceptList(baselineObservationList);
-		System.out.println(SepsisDeterminationAlgorithm.analyze(patientRecord, baselineConcepts, currentConcepts));
-		for (Observation observation : currentObservationList) {
-			System.out.println(
-					observation.getTimestamp() + ": " + observation.getConcept() + ": " + observation.getMeasurement());
-		}
-		System.out.println();
-		for (Observation observation : baselineObservationList) {
-			System.out.println(
-					observation.getTimestamp() + ": " + observation.getConcept() + ": " + observation.getMeasurement());
+		String numberOfPatients = showInputDialog(null, "Enter number of patients");
+		if (numberOfPatients == null) {
+			return;
+		} else {
+			while (!isInt(numberOfPatients)) {
+				numberOfPatients = showInputDialog(null, "Enter number of patients");
+				if (numberOfPatients == null) {
+					return;
+				}
+			}
+			String[] patientID = new String[Integer.parseInt(numberOfPatients)];
+			for (int i = 1; i < patientID.length; ++i) {
+				patientID[i] = showInputDialog(null, "Enter patientID: ");
+				if (patientID[i] == null) {
+					return;
+				}
+				PatientRecord patientRecord = connection.getPatientRecord(patientID[i]);
+				if (patientRecord == null) {
+					JOptionPane.showMessageDialog(null, "Patient" + patientID[i] + " does not exist.");
+					return;
+				}
+				JOptionPane.showMessageDialog(null, "Patient" + patientID[i] + " exists.");
+				LocalDateTime now = LocalDateTime.now();
+				Period age = Period.between(patientRecord.getBirthDate(), now.toLocalDate());
+				System.out.println("  Time Reported: " + now.toString());
+				System.out.println("  PatientID: " + patientID[i]);
+				System.out.println(
+						"  Patient Name: " + patientRecord.getFamilyName() + " " + patientRecord.getGivenName());
+				System.out.println("  Age: " + age.getYears() + " years " + age.getMonths() + " months " + age.getDays()
+						+ " days");
+				System.out.println("  Location: " + patientRecord.getLocation());
+
+				Set<Observation> currentObservationList = new HashSet<Observation>();
+				Set<Observation> baselineObservationList = new HashSet<Observation>();
+				setUpObservationList(connection.getObservationRecords(patientRecord.getUUID()), currentObservationList,
+						baselineObservationList);
+				for (ObservationRecord observation : connection.getObservationRecords(patientRecord.getUUID())) {
+					if (observation.getMeasurement() == null) {
+						System.out.println(
+								observation.getTimestamp() + ": " + observation.getConcept() + ": " + "unknown");
+					} else {
+						System.out.println(observation.getTimestamp() + ": " + observation.getConcept() + ": "
+								+ observation.getMeasurement());
+					}
+				}
+				Concept currentConcepts = setUpCurrentConceptList(currentObservationList);
+				Concept baselineConcepts = setUpBaselineConceptList(baselineObservationList);
+				System.out.println(
+						SepsisDeterminationAlgorithm.analyze(patientRecord, baselineConcepts, currentConcepts));
+				for (Observation observation : currentObservationList) {
+					if (observation.getMeasurement() == null) {
+						System.out.println(
+								observation.getTimestamp() + ": " + observation.getConcept() + ": " + "unknown");
+					} else {
+						System.out.println(observation.getTimestamp() + ": " + observation.getConcept() + ": "
+								+ observation.getMeasurement());
+					}
+				}
+				System.out.println();
+				for (Observation observation : baselineObservationList) {
+					if (observation.getMeasurement() == null) {
+						System.out.println(
+								observation.getTimestamp() + ": " + observation.getConcept() + ": " + "unknown");
+					} else {
+						System.out.println(observation.getTimestamp() + ": " + observation.getConcept() + ": "
+								+ observation.getMeasurement());
+					}
+				}
+			}
 		}
 		/*
 		 * } catch (ConnectException ex) { JOptionPane.showMessageDialog(null,
@@ -343,8 +467,8 @@ public class SepsisDeterminationApp {
 		 * JOptionPane.showMessageDialog(null, "Could not contact the server."); } catch
 		 * (ProtocolException ex) { JOptionPane.showMessageDialog(null,
 		 * "Credentials were incorrect."); }
+		 * 
+		 * } }
 		 */
-
 	}
-
 }
