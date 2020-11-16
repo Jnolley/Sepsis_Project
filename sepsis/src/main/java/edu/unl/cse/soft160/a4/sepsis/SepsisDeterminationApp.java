@@ -39,10 +39,26 @@ public class SepsisDeterminationApp {
 				Observation diastolicBloodPressure = new Observation(observationRecord.getTimestamp(),
 						"Diastolic blood pressure", observationRecord.getMeasurement());
 				categorizeObservationList(currentObservationList, baselineObservationList, diastolicBloodPressure);
+			} else if (observationRecord.getConcept().equals("Leukocytes (#/µL)")) {
+				Observation wbcCount = new Observation(observationRecord.getTimestamp(), "WBCCount",
+						observationRecord.getMeasurement());
+				categorizeObservationList(currentObservationList, baselineObservationList, wbcCount);
+			} else if (observationRecord.getConcept().equals("Pulse")) {
+				Observation heartRate = new Observation(observationRecord.getTimestamp(), "Heart rate",
+						observationRecord.getMeasurement());
+				categorizeObservationList(currentObservationList, baselineObservationList, heartRate);
 			} else if (observationRecord.getConcept().equals("Systolic blood pressure")) {
 				Observation systolicBloodPressure = new Observation(observationRecord.getTimestamp(),
 						"Systolic blood pressure", observationRecord.getMeasurement());
 				categorizeObservationList(currentObservationList, baselineObservationList, systolicBloodPressure);
+			} else if (observationRecord.getConcept().equals("Platelets (#/µL)")) {
+				Observation coagulationPlatelets = new Observation(observationRecord.getTimestamp(),
+						"Coagulation Platelets", observationRecord.getMeasurement());
+				categorizeObservationList(currentObservationList, baselineObservationList, coagulationPlatelets);
+			} else if (observationRecord.getConcept().equals("Bilirubin Direct (mg/dL)")) {
+				Observation liverBilirubin = new Observation(observationRecord.getTimestamp(), "Liver Bilirubin",
+						observationRecord.getMeasurement());
+				categorizeObservationList(currentObservationList, baselineObservationList, liverBilirubin);
 			} else if (observationRecord.getConcept().equals("Creatinine in Blood (mg/dL)")) {
 				Observation creatinineInBlood = new Observation(observationRecord.getTimestamp(),
 						"Creatinine in blood (mg/dL)", observationRecord.getMeasurement());
@@ -61,12 +77,6 @@ public class SepsisDeterminationApp {
 		Observation needForVasopressorSupport1 = new Observation(LocalDateTime.now(), "Need For Vasopressor Support",
 				toBoolean(needForVasopressorSupport));
 		currentObservationList.add(needForVasopressorSupport1);
-		String heartRate = showInputDialog(null, "What is the patient's heart rate? (): ");
-		Observation heartRate1 = new Observation(LocalDateTime.now(), "Heart rate", Double.parseDouble(heartRate));
-		currentObservationList.add(heartRate1);
-		String WBCCount = showInputDialog(null, "What is the patient's wbc count? (): ");
-		Observation wbcCount1 = new Observation(LocalDateTime.now(), "WBCCount", Double.parseDouble(WBCCount));
-		currentObservationList.add(wbcCount1);
 		String isInpatientStatus = showInputDialog(null, "Is the patient's status inpatient status?(Y/N): ");
 		Observation isInpatientStatus1 = new Observation(LocalDateTime.now(), "Is Inpatient Status",
 				toBoolean(isInpatientStatus));
@@ -111,26 +121,6 @@ public class SepsisDeterminationApp {
 		Observation currentRespiratoryPaOxyFiOxy1 = new Observation(LocalDateTime.now(),
 				"Current Respiratory PaOxy/FiOxy", Double.parseDouble(currentRespiratoryPaOxyFiOxy));
 		currentObservationList.add(currentRespiratoryPaOxyFiOxy1);
-		String baselineCoagulationPlatelets = showInputDialog(null,
-				"What is the patient's baseline coagulation platelets? (): ");
-		Observation baselineCoagulationPlatelets1 = new Observation(LocalDateTime.now(),
-				"Baseline Coagulation Platelets", Double.parseDouble(baselineCoagulationPlatelets));
-		baselineObservationList.add(baselineCoagulationPlatelets1);
-		String currentCoagulationPlatelets = showInputDialog(null,
-				"What is the patient's current coagulation platelets? (): ");
-		Observation currentCoagulationPlatelets1 = new Observation(LocalDateTime.now(), "Current Coagulation Platelets",
-				Double.parseDouble(currentCoagulationPlatelets));
-		currentObservationList.add(currentCoagulationPlatelets1);
-		String baselineLiverBilirubin = showInputDialog(null,
-				"What is the patient's baseline use of liver bilirubin? (): ");
-		Observation baselineLiverBilirubin1 = new Observation(LocalDateTime.now(), "Baseline Liver Bilirubin",
-				Double.parseDouble(baselineLiverBilirubin));
-		baselineObservationList.add(baselineLiverBilirubin1);
-		String currentliverBilirubin = showInputDialog(null,
-				"What is the patient's current use of liver bilirubin? (): ");
-		Observation currentliverBilirubin1 = new Observation(LocalDateTime.now(), "Current Liver Bilirubin",
-				Double.parseDouble(currentliverBilirubin));
-		currentObservationList.add(currentliverBilirubin1);
 		String baselineDopamine = showInputDialog(null, "What is the patient's baseline use of dopamine? (): ");
 		Observation baselineDopamine1 = new Observation(LocalDateTime.now(), "Baseline Dopamine",
 				Double.parseDouble(baselineDopamine));
@@ -210,9 +200,9 @@ public class SepsisDeterminationApp {
 				concepts.setIsImmunocompromised(observation.getBMeasurement());
 			} else if (observation.getConcept().equals("Baseline Respiratory PaOxy/FiOxy")) {
 				concepts.setRespiratoryPaOxyFiOxy(observation.getDMeasurement());
-			} else if (observation.getConcept().equals("Baseline Coagulation Platelets")) {
+			} else if (observation.getConcept().equals("Coagulation Platelets")) {
 				concepts.setCoagulationPlatelets(observation.getDMeasurement());
-			} else if (observation.getConcept().equals("Baseline Liver Bilirubin")) {
+			} else if (observation.getConcept().equals("Liver Bilirubin")) {
 				concepts.setLiverBilirubin(observation.getDMeasurement());
 			} else if (observation.getConcept().equals("Baseline Dopamine")) {
 				concepts.setDopamine(observation.getDMeasurement());
@@ -268,9 +258,9 @@ public class SepsisDeterminationApp {
 				concepts.setIsImmunocompromised(observation.getBMeasurement());
 			} else if (observation.getConcept().equals("Current Respiratory PaOxy/FiOxy")) {
 				concepts.setRespiratoryPaOxyFiOxy(observation.getDMeasurement());
-			} else if (observation.getConcept().equals("Current Coagulation Platelets")) {
+			} else if (observation.getConcept().equals("Coagulation Platelets")) {
 				concepts.setCoagulationPlatelets(observation.getDMeasurement());
-			} else if (observation.getConcept().equals("Current Liver Bilirubin")) {
+			} else if (observation.getConcept().equals("Liver Bilirubin")) {
 				concepts.setLiverBilirubin(observation.getDMeasurement());
 			} else if (observation.getConcept().equals("Current Dopamine")) {
 				concepts.setDopamine(observation.getDMeasurement());

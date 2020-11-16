@@ -133,7 +133,7 @@ public class SepsisDeterminationAlgorithm {
 	}
 
 	public static boolean organDysfunction(Concept currentConcepts, Concept baselineConcepts) {
-		Integer SOFAScoreChange = Math.abs(computeSOFAScore(currentConcepts) - computeSOFAScore(baselineConcepts));
+		Integer SOFAScoreChange = computeSOFAScore(currentConcepts) - computeSOFAScore(baselineConcepts);
 		if (SOFAScoreChange >= 2) {
 			return true;
 		} else {
@@ -184,7 +184,7 @@ public class SepsisDeterminationAlgorithm {
 
 				}
 			}
-			return SepsisDetermination.INDETERMINATE;
+			return SepsisDetermination.CONTINUE_MONITORING;
 
 		} catch (NullPointerException e) {
 			return SepsisDetermination.INDETERMINATE;
