@@ -1,15 +1,11 @@
 package edu.unl.cse.soft160.a4.sepsis;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import edu.unl.cse.soft160.rest_connector.connector.ObservationRecord;
-import edu.unl.cse.soft160.rest_connector.connector.OpenMRSConnection;
 import edu.unl.cse.soft160.rest_connector.connector.PatientRecord;
 
 // Harry Do
@@ -20,7 +16,7 @@ public class SepsisDeterminationAlgorithm {
 		for (Observation observation : observationList) {
 			LocalDate timestamp = observation.getTimestamp().toLocalDate();
 			Period time = Period.between(timestamp, LocalDate.now());
-			if (time.getDays() <= 1 && !observation.getConcept().equals("Baseline Glasgow Coma Scale")) {
+			if (time.getDays() <= 1) {
 				currentObservationList.add(observation);
 			}
 		}
@@ -32,15 +28,14 @@ public class SepsisDeterminationAlgorithm {
 		for (Observation observation : observationList) {
 			LocalDate timestamp = observation.getTimestamp().toLocalDate();
 			Period time = Period.between(timestamp, LocalDate.now());
-			if (time.getDays() > 1 && time.getDays() <= 2
-					&& !observation.getConcept().equals("Current Glasgow Coma Scale")) {
+			if (time.getDays() > 1 && time.getDays() <= 2) {
 				baselineObservationList.add(observation);
 			}
 		}
 		return baselineObservationList;
 	}
 
-	public static Concept setUpConceptList(Set<Observation> observationList) {
+	public static Concept setUpBaselineConceptList(Set<Observation> observationList) {
 		Concept concepts = new Concept();
 		for (Observation observation : observationList) {
 			if (observation.getConcept().equals("Is Pregnant")) {
@@ -75,23 +70,81 @@ public class SepsisDeterminationAlgorithm {
 				concepts.setInfectionRecentSurgicalProcedure(observation.getBMeasurement());
 			} else if (observation.getConcept().equals("is Immunocompromised")) {
 				concepts.setIsImmunocompromised(observation.getBMeasurement());
-			} else if (observation.getConcept().equals("Respiratory PaOxy/FiOxy")) {
+			} else if (observation.getConcept().equals("Baseline Respiratory PaOxy/FiOxy")) {
 				concepts.setRespiratoryPaOxyFiOxy(observation.getDMeasurement());
-			} else if (observation.getConcept().equals("Coagulation Platelets")) {
+			} else if (observation.getConcept().equals("Baseline Coagulation Platelets")) {
 				concepts.setCoagulationPlatelets(observation.getDMeasurement());
-			} else if (observation.getConcept().equals("Liver Bilirubin")) {
+			} else if (observation.getConcept().equals("Baseline Liver Bilirubin")) {
 				concepts.setLiverBilirubin(observation.getDMeasurement());
-			} else if (observation.getConcept().equals("Dopamine")) {
+			} else if (observation.getConcept().equals("Baseline Dopamine")) {
 				concepts.setDopamine(observation.getDMeasurement());
-			} else if (observation.getConcept().equals("Using Any Doputamine?")) {
+			} else if (observation.getConcept().equals("Using Any Doputamine Baseline")) {
 				concepts.setAnyDoputamine(observation.getBMeasurement());
-			} else if (observation.getConcept().equals("Epinephrine")) {
+			} else if (observation.getConcept().equals("Baseline Epinephrine")) {
 				concepts.setEpinephrine(observation.getDMeasurement());
-			} else if (observation.getConcept().equals("Norepinephrine")) {
+			} else if (observation.getConcept().equals("Baseline Norepinephrine")) {
+				concepts.setNorepinephrine(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Baseline Glasgow Coma Scale")) {
+				concepts.setGlasgowComaScale(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Creatinine in Blood (mg/dL)")) {
+				concepts.setRenalCreatinine(observation.getDMeasurement());
+			}
+		}
+		return concepts;
+	}
+
+	public static Concept setUpCurrentConceptList(Set<Observation> observationList) {
+		Concept concepts = new Concept();
+		for (Observation observation : observationList) {
+			if (observation.getConcept().equals("Is Pregnant")) {
+				concepts.setIsPregnant(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Temperature")) {
+				concepts.setTemperature(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Heart rate")) {
+				concepts.setHeartRate(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Respiratory rate")) {
+				concepts.setRespiratoryRate(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("WBCCount")) {
+				concepts.setWBCCount(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Systolic blood pressure")) {
+				concepts.setSystolicBloodPressure(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Diastolic blood pressure")) {
+				concepts.setDiastolicBloodPressure(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Is Inpatient Status")) {
+				concepts.setIsInpatientStatus(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Need For Vasopressor Support")) {
+				concepts.setNeedForVasopressorSupport(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Is responsive")) {
+				concepts.setIsResponsive(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Cardiac arrhythmia")) {
+				concepts.setCardiacArrhythmia(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Decline in baseline mental status")) {
+				concepts.setDeclineInBaselineMentalStatus(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Infection Skin Wound")) {
+				concepts.setInfectionSkinWound(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Infection Invasive Device")) {
+				concepts.setInfectionInvasiveDevice(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Infection Recent Surgical Procedure")) {
+				concepts.setInfectionRecentSurgicalProcedure(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("is Immunocompromised")) {
+				concepts.setIsImmunocompromised(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Current Respiratory PaOxy/FiOxy")) {
+				concepts.setRespiratoryPaOxyFiOxy(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Current Coagulation Platelets")) {
+				concepts.setCoagulationPlatelets(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Current Liver Bilirubin")) {
+				concepts.setLiverBilirubin(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Current Dopamine")) {
+				concepts.setDopamine(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Using Any Doputamine Currently")) {
+				concepts.setAnyDoputamine(observation.getBMeasurement());
+			} else if (observation.getConcept().equals("Current Epinephrine")) {
+				concepts.setEpinephrine(observation.getDMeasurement());
+			} else if (observation.getConcept().equals("Current Norepinephrine")) {
 				concepts.setNorepinephrine(observation.getDMeasurement());
 			} else if (observation.getConcept().equals("Current Glasgow Coma Scale")) {
 				concepts.setGlasgowComaScale(observation.getDMeasurement());
-			} else if (observation.getConcept().equals("Baseline Glasgow Coma Scale")) {
+			} else if (observation.getConcept().equals("Current Glasgow Coma Scale")) {
 				concepts.setGlasgowComaScale(observation.getDMeasurement());
 			} else if (observation.getConcept().equals("Creatinine in Blood (mg/dL)")) {
 				concepts.setRenalCreatinine(observation.getDMeasurement());
@@ -211,18 +264,17 @@ public class SepsisDeterminationAlgorithm {
 		} else if (concept.getRenalCreatinine() >= 2 && concept.getRenalCreatinine() <= 3.4) {
 			scoreCreatinineorUrine = 2;
 		}
-		if ((concept.getRenalCreatinine() >= 3.4 && concept.getRenalCreatinine() < 4.9)
-				|| (concept.getUrineOutput() < 500) && concept.getUrineOutput() >= 200) {
+		if ((concept.getRenalCreatinine() >= 3.4 && concept.getRenalCreatinine() < 4.9)) {
 			scoreCreatinineorUrine = 3;
-		} else if (concept.getRenalCreatinine() >= 5 || concept.getUrineOutput() < 200) {
+		} else if (concept.getRenalCreatinine() >= 5) {
 			scoreCreatinineorUrine = 4;
 		}
 		return Math.min(scoreRespiratoryPaOxyFiOxy, Math.min(scoreCoagulation, Math.min(scoreLiverBilirubin,
 				Math.min(scoreCardiovascularHypotension, Math.min(scoreGlasgowComaScale, scoreCreatinineorUrine)))));
 	}
 
-	public static boolean organDysfunction(Concept currentconcept, Concept baselineConcepts) {
-		Integer SOFAScoreChange = Math.abs(computeSOFAScore(currentconcept) - computeSOFAScore(baselineConcepts));
+	public static boolean organDysfunction(Concept currentConcepts, Concept baselineConcepts) {
+		Integer SOFAScoreChange = Math.abs(computeSOFAScore(currentConcepts) - computeSOFAScore(baselineConcepts));
 		if (SOFAScoreChange >= 2) {
 			return true;
 		} else {
@@ -252,8 +304,8 @@ public class SepsisDeterminationAlgorithm {
 		try {
 			Set<Observation> currentObservationList = getCurrentObservationList(observationList);
 			Set<Observation> baselineObservationList = getBaselineObservationList(observationList);
-			Concept currentConcepts = setUpConceptList(currentObservationList);
-			Concept baselineConcepts = setUpConceptList(baselineObservationList);
+			Concept currentConcepts = setUpCurrentConceptList(currentObservationList);
+			Concept baselineConcepts = setUpBaselineConceptList(baselineObservationList);
 			currentConcepts.setMap();
 			if (isNotAdult(patient)) {
 				return SepsisDetermination.NON_ADULT;

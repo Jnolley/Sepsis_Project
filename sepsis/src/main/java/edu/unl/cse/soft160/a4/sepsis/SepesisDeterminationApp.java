@@ -79,8 +79,8 @@ public class SepesisDeterminationApp {
 		observationList.add(cardiacArrhythmia1);
 		String declineInBaselineMentalStatus = showInputDialog(null,
 				"Does the patient has decline in baseline mental status?(Y/N): ");
-		Observation declineInBaselineMentalStatus1 = new Observation(LocalDateTime.now(), "Decline in baseline mental status",
-				toBoolean(declineInBaselineMentalStatus));
+		Observation declineInBaselineMentalStatus1 = new Observation(LocalDateTime.now(),
+				"Decline in baseline mental status", toBoolean(declineInBaselineMentalStatus));
 		observationList.add(declineInBaselineMentalStatus1);
 		String infectionSkinWound = showInputDialog(null, "Does the patient has infection skin wound?(Y/N): ");
 		Observation infectionSkinWound1 = new Observation(LocalDateTime.now(), "Infection Skin Wound",
@@ -100,31 +100,68 @@ public class SepesisDeterminationApp {
 		Observation isImmunocompromised1 = new Observation(LocalDateTime.now(), "is Immunocompromised",
 				toBoolean(isImmunocompromised));
 		observationList.add(isImmunocompromised1);
-		String respiratoryPaOxyFiOxy = showInputDialog(null, "What is the patient's respiratory PaOxy/FiOxy? (): ");
-		Observation respiratoryPaOxyFiOxy1 = new Observation(LocalDateTime.now(), "Respiratory PaOxy/FiOxy",
-				Double.parseDouble(respiratoryPaOxyFiOxy));
-		observationList.add(respiratoryPaOxyFiOxy1);
-		String coagulationPlatelets = showInputDialog(null, "What is the patient's coagulation platelets? (): ");
-		Observation coagulationPlatelets1 = new Observation(LocalDateTime.now(), "Coagulation Platelets",
-				Double.parseDouble(coagulationPlatelets));
-		observationList.add(coagulationPlatelets1);
-		String liverBilirubin = showInputDialog(null, "What is the patient's liver bilirubin? (): ");
-		Observation liverBilirubin1 = new Observation(LocalDateTime.now(), "Liver Bilirubin",
-				Double.parseDouble(liverBilirubin));
-		observationList.add(liverBilirubin1);
-		String dopamine = showInputDialog(null, "What is the patient's dopamine? (): ");
-		Observation dopamine1 = new Observation(LocalDateTime.now(), "Dopamine", Double.parseDouble(dopamine));
-		observationList.add(dopamine1);
-		String anyDoputamine = showInputDialog(null, "Does the patient use any doputamine?(Y/N): ");
-		Observation anyDoputamine1 = new Observation(LocalDateTime.now(), "Using Any Doputamine?", toBoolean(anyDoputamine));
-		observationList.add(anyDoputamine1);
-		String epinephrine = showInputDialog(null, "What is the patient's epinephrine? (): ");
-		Observation epinephrine1 = new Observation(LocalDateTime.now(), "Epinephrine", Double.parseDouble(epinephrine));
-		observationList.add(epinephrine1);
-		String norepinephrine = showInputDialog(null, "What is the patient's dopamine? (): ");
-		Observation norepinephrine1 = new Observation(LocalDateTime.now(), "Norepinephrine",
-				Double.parseDouble(norepinephrine));
-		observationList.add(norepinephrine1);
+		String baselineRespiratoryPaOxyFiOxy = showInputDialog(null,
+				"What is the patient's baseline respiratory PaOxy/FiOxy? (): ");
+		Observation baselineRespiratoryPaOxyFiOxy1 = new Observation(LocalDateTime.now(),
+				"Baseline Respiratory PaOxy/FiOxy", Double.parseDouble(baselineRespiratoryPaOxyFiOxy));
+		observationList.add(baselineRespiratoryPaOxyFiOxy1);
+		String currentRespiratoryPaOxyFiOxy = showInputDialog(null,
+				"What is the patient's current respiratory PaOxy/FiOxy? (): ");
+		Observation currentRespiratoryPaOxyFiOxy1 = new Observation(LocalDateTime.now(),
+				"Current Respiratory PaOxy/FiOxy", Double.parseDouble(currentRespiratoryPaOxyFiOxy));
+		observationList.add(currentRespiratoryPaOxyFiOxy1);
+		String baselineCoagulationPlatelets = showInputDialog(null,
+				"What is the patient's baseline coagulation platelets? (): ");
+		Observation baselineCoagulationPlatelets1 = new Observation(LocalDateTime.now(),
+				"Baseline Coagulation Platelets", Double.parseDouble(baselineCoagulationPlatelets));
+		observationList.add(baselineCoagulationPlatelets1);
+		String currentCoagulationPlatelets = showInputDialog(null,
+				"What is the patient's current coagulation platelets? (): ");
+		Observation currentCoagulationPlatelets1 = new Observation(LocalDateTime.now(), "Current Coagulation Platelets",
+				Double.parseDouble(currentCoagulationPlatelets));
+		observationList.add(currentCoagulationPlatelets1);
+		String baselineLiverBilirubin = showInputDialog(null,
+				"What is the patient's baseline use of liver bilirubin? (): ");
+		Observation baselineLiverBilirubin1 = new Observation(LocalDateTime.now(), "Baseline Liver Bilirubin",
+				Double.parseDouble(baselineLiverBilirubin));
+		observationList.add(baselineLiverBilirubin1);
+		String currentliverBilirubin = showInputDialog(null,
+				"What is the patient's current use of liver bilirubin? (): ");
+		Observation currentliverBilirubin1 = new Observation(LocalDateTime.now(), "Current Liver Bilirubin",
+				Double.parseDouble(currentliverBilirubin));
+		observationList.add(currentliverBilirubin1);
+		String baselineDopamine = showInputDialog(null, "What is the patient's baseline use of dopamine? (): ");
+		Observation baselineDopamine1 = new Observation(LocalDateTime.now(), "Baseline Dopamine",
+				Double.parseDouble(baselineDopamine));
+		observationList.add(baselineDopamine1);
+		String currentDopamine = showInputDialog(null, "What is the patient's current use of dopamine? (): ");
+		Observation currentDopamine1 = new Observation(LocalDateTime.now(), "Current Dopamine",
+				Double.parseDouble(currentDopamine));
+		observationList.add(currentDopamine1);
+		String baselineAnyDoputamine = showInputDialog(null, "Does the patient use any doputamine yesterday?(Y/N): ");
+		Observation baselineAnyDoputamine1 = new Observation(LocalDateTime.now(), "Using Any Doputamine Baseline",
+				toBoolean(baselineAnyDoputamine));
+		observationList.add(baselineAnyDoputamine1);
+		String currentAnyDoputamine = showInputDialog(null, "Does the patient use any doputamine currently?(Y/N): ");
+		Observation currentAnyDoputamine1 = new Observation(LocalDateTime.now(), "Using Any Doputamine Currently",
+				toBoolean(currentAnyDoputamine));
+		observationList.add(currentAnyDoputamine1);
+		String baselineEpinephrine = showInputDialog(null, "What is the patient's baseline epinephrine? (): ");
+		Observation baselineEpinephrine1 = new Observation(LocalDateTime.now(), "Baseline Epinephrine",
+				Double.parseDouble(baselineEpinephrine));
+		observationList.add(baselineEpinephrine1);
+		String currentEpinephrine = showInputDialog(null, "What is the patient's epinephrine? (): ");
+		Observation currentEpinephrine1 = new Observation(LocalDateTime.now(), "Current Epinephrine",
+				Double.parseDouble(currentEpinephrine));
+		observationList.add(currentEpinephrine1);
+		String baselineNorepinephrine = showInputDialog(null, "What is the patient's baseline norepinephrine? (): ");
+		Observation baselineNorepinephrine1 = new Observation(LocalDateTime.now(), "Baseline Norepinephrine",
+				Double.parseDouble(baselineNorepinephrine));
+		observationList.add(baselineNorepinephrine1);
+		String currentNorepinephrine = showInputDialog(null, "What is the patient's cureent norepinephrine? (): ");
+		Observation currentNorepinephrine1 = new Observation(LocalDateTime.now(), "Current Norepinephrine",
+				Double.parseDouble(currentNorepinephrine));
+		observationList.add(currentNorepinephrine1);
 		String baseGlasgowComaScale = showInputDialog(null, "What is the patient's baseline glasgowComaScale? (): ");
 		Observation baseGlasgowComaScale1 = new Observation(LocalDateTime.now(), "Baseline Glasgow Coma Scale",
 				Double.parseDouble(baseGlasgowComaScale));
@@ -173,9 +210,10 @@ public class SepesisDeterminationApp {
 					Set<Observation> observationList = setUpObservationList(
 							connection.getObservationRecords(patientRecord.getUUID()));
 					for (Observation observation : observationList) {
-						System.out.println(observation.getTimestamp() + ": " + observation.getConcept() + ": 2"
+						System.out.println(observation.getTimestamp() + ": " + observation.getConcept() + ": "
 								+ observation.getMeasurement());
 					}
+					System.out.println(SepsisDeterminationAlgorithm.analyze(observationList, patientRecord));
 				} catch (ConnectException ex) {
 					JOptionPane.showMessageDialog(null, "Could not contact the server.");
 				} catch (FileNotFoundException ex) {

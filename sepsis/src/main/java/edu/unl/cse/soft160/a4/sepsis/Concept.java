@@ -31,7 +31,6 @@ public class Concept {
 	}
 
 	private Double renalCreatinine;//
-	private Double urineOutput;//
 	private Double map;
 
 	public Concept(Boolean isPregnant, Double temperature, Double heartRate, Double respiratoryRate, Double wBCCount,
@@ -68,7 +67,6 @@ public class Concept {
 		this.norepinephrine = norepinephrine;
 		this.GlasgowComaScale = GlasgowComaScale;
 		this.renalCreatinine = renalCreatinine;
-		this.urineOutput = urineOutput;
 		this.map = (systolicBloodPressure - diastolicBloodPressure) / 3 + diastolicBloodPressure;
 	}
 
@@ -270,14 +268,6 @@ public class Concept {
 
 	public void setRenalCreatinine(Double renalCreatinine) {
 		this.renalCreatinine = renalCreatinine;
-	}
-
-	public Double getUrineOutput() {
-		return urineOutput;
-	}
-
-	public void setUrineOutput(Double urineOutput) {
-		this.urineOutput = urineOutput;
 	}
 
 	public Double getMap() {
