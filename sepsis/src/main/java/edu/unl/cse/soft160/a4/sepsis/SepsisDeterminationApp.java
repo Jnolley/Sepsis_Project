@@ -402,10 +402,13 @@ public class SepsisDeterminationApp {
 				}
 			}
 			String[] patientID = new String[Integer.parseInt(numberOfPatients)];
-			for (int i = 1; i < patientID.length; ++i) {
+			for (int i = 0; i < patientID.length; ++i) {
 				patientID[i] = showInputDialog(null, "Enter patientID: ");
 				if (patientID[i] == null) {
 					return;
+				}
+				if (!patientID[i].matches("[0-9A-Z]*")) {
+					patientID[i] = showInputDialog(null, "Enter patientID: ");
 				}
 				PatientRecord patientRecord = connection.getPatientRecord(patientID[i]);
 				if (patientRecord == null) {
@@ -422,20 +425,10 @@ public class SepsisDeterminationApp {
 				System.out.println("  Age: " + age.getYears() + " years " + age.getMonths() + " months " + age.getDays()
 						+ " days");
 				System.out.println("  Location: " + patientRecord.getLocation());
-
 				Set<Observation> currentObservationList = new HashSet<Observation>();
 				Set<Observation> baselineObservationList = new HashSet<Observation>();
 				setUpObservationList(connection.getObservationRecords(patientRecord.getUUID()), currentObservationList,
 						baselineObservationList);
-				for (ObservationRecord observation : connection.getObservationRecords(patientRecord.getUUID())) {
-					if (observation.getMeasurement() == null) {
-						System.out.println(
-								observation.getTimestamp() + ": " + observation.getConcept() + ": " + "unknown");
-					} else {
-						System.out.println(observation.getTimestamp() + ": " + observation.getConcept() + ": "
-								+ observation.getMeasurement());
-					}
-				}
 				Concept currentConcepts = setUpCurrentConceptList(currentObservationList);
 				Concept baselineConcepts = setUpBaselineConceptList(baselineObservationList);
 				System.out.println(
@@ -449,7 +442,6 @@ public class SepsisDeterminationApp {
 								+ observation.getMeasurement());
 					}
 				}
-				System.out.println();
 				for (Observation observation : baselineObservationList) {
 					if (observation.getMeasurement() == null) {
 						System.out.println(
