@@ -11,7 +11,7 @@ Authors:
 *   Adam Kamrath <akamrath2@huskers.unl.edu>
 *   Harry Do <hdo7@huskers.unl.edu>
 *   Jack Nolley <jackmnolley@gmail.com>
-*   Nathan Srisa-an <>
+*   Nathan Srisa-an <sriswong@me.com>
 
 
 ## Dependencies
