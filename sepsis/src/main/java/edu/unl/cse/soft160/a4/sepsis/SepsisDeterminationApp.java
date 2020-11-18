@@ -162,33 +162,36 @@ public class SepsisDeterminationApp {
 				toBoolean(isImmunocompromised));
 		currentObservationList.add(isImmunocompromised1);
 		String baselineRespiratoryPaOxyFiOxy = showInputDialog(null,
-				"What is the patient's baseline respiratory PaOxy/FiOxy? (): ");
+				"What is the patient's baseline respiratory PaOxy/FiOxy?(mmHg): ");
 		while (!isNumeric(baselineRespiratoryPaOxyFiOxy)) {
 			baselineRespiratoryPaOxyFiOxy = showInputDialog(null,
-					"What is the patient's baseline respiratory PaOxy/FiOxy? (): ");
+					"What is the patient's baseline respiratory PaOxy/FiOxy?(mmHg): ");
 		}
 		Observation baselineRespiratoryPaOxyFiOxy1 = new Observation(LocalDateTime.now(),
 				"Baseline Respiratory PaOxy/FiOxy", Double.parseDouble(baselineRespiratoryPaOxyFiOxy));
 		baselineObservationList.add(baselineRespiratoryPaOxyFiOxy1);
 		String currentRespiratoryPaOxyFiOxy = showInputDialog(null,
-				"What is the patient's current respiratory PaOxy/FiOxy? (): ");
+				"What is the patient's current respiratory PaOxy/FiOxy?(mmHg): ");
 		while (!isNumeric(currentRespiratoryPaOxyFiOxy)) {
 			currentRespiratoryPaOxyFiOxy = showInputDialog(null,
-					"What is the patient's current respiratory PaOxy/FiOxy? (): ");
+					"What is the patient's current respiratory PaOxy/FiOxy?(mmHg): ");
 		}
 		Observation currentRespiratoryPaOxyFiOxy1 = new Observation(LocalDateTime.now(),
 				"Current Respiratory PaOxy/FiOxy", Double.parseDouble(currentRespiratoryPaOxyFiOxy));
 		currentObservationList.add(currentRespiratoryPaOxyFiOxy1);
-		String baselineDopamine = showInputDialog(null, "What is the patient's baseline use of dopamine? (): ");
+		String baselineDopamine = showInputDialog(null,
+				"What is the patient's baseline use of dopamine?(mcg/kg/minute): ");
 		while (!isNumeric(baselineDopamine)) {
-			baselineDopamine = showInputDialog(null, "What is the patient's baseline use of dopamine? (): ");
+			baselineDopamine = showInputDialog(null,
+					"What is the patient's baseline use of dopamine?(mcg/kg/minute): ");
 		}
 		Observation baselineDopamine1 = new Observation(LocalDateTime.now(), "Baseline Dopamine",
 				Double.parseDouble(baselineDopamine));
 		baselineObservationList.add(baselineDopamine1);
-		String currentDopamine = showInputDialog(null, "What is the patient's current use of dopamine? (): ");
+		String currentDopamine = showInputDialog(null,
+				"What is the patient's current use of dopamine?(mcg/kg/minute): ");
 		while (!isNumeric(currentDopamine)) {
-			currentDopamine = showInputDialog(null, "What is the patient's current use of dopamine? (): ");
+			currentDopamine = showInputDialog(null, "What is the patient's current use of dopamine?(mcg/kg/minute): ");
 		}
 		Observation currentDopamine1 = new Observation(LocalDateTime.now(), "Current Dopamine",
 				Double.parseDouble(currentDopamine));
@@ -207,30 +210,36 @@ public class SepsisDeterminationApp {
 		Observation currentAnyDoputamine1 = new Observation(LocalDateTime.now(), "Using Any Doputamine Currently",
 				toBoolean(currentAnyDoputamine));
 		currentObservationList.add(currentAnyDoputamine1);
-		String baselineEpinephrine = showInputDialog(null, "What is the patient's baseline epinephrine? (): ");
+		String baselineEpinephrine = showInputDialog(null,
+				"What is the patient's baseline epinephrine?(mcg/kg/minute): ");
 		while (!isNumeric(baselineEpinephrine)) {
-			baselineEpinephrine = showInputDialog(null, "What is the patient's baseline epinephrine? (): ");
+			baselineEpinephrine = showInputDialog(null, "What is the patient's baseline epinephrine?(mcg/kg/minute): ");
 		}
 		Observation baselineEpinephrine1 = new Observation(LocalDateTime.now(), "Baseline Epinephrine",
 				Double.parseDouble(baselineEpinephrine));
 		baselineObservationList.add(baselineEpinephrine1);
-		String currentEpinephrine = showInputDialog(null, "What is the patient's current epinephrine? (): ");
+		String currentEpinephrine = showInputDialog(null,
+				"What is the patient's current epinephrine?(mcg/kg/minute): ");
 		while (!isNumeric(currentEpinephrine)) {
-			currentEpinephrine = showInputDialog(null, "What is the patient's current epinephrine? (): ");
+			currentEpinephrine = showInputDialog(null, "What is the patient's current epinephrine?(mcg/kg/minute): ");
 		}
 		Observation currentEpinephrine1 = new Observation(LocalDateTime.now(), "Current Epinephrine",
 				Double.parseDouble(currentEpinephrine));
 		currentObservationList.add(currentEpinephrine1);
-		String baselineNorepinephrine = showInputDialog(null, "What is the patient's baseline norepinephrine? (): ");
+		String baselineNorepinephrine = showInputDialog(null,
+				"What is the patient's baseline norepinephrine?(mcg/kg/minute): ");
 		while (!isNumeric(baselineNorepinephrine)) {
-			baselineNorepinephrine = showInputDialog(null, "What is the patient's baseline norepinephrine? (): ");
+			baselineNorepinephrine = showInputDialog(null,
+					"What is the patient's baseline norepinephrine?(mcg/kg/minute): ");
 		}
 		Observation baselineNorepinephrine1 = new Observation(LocalDateTime.now(), "Baseline Norepinephrine",
 				Double.parseDouble(baselineNorepinephrine));
 		baselineObservationList.add(baselineNorepinephrine1);
-		String currentNorepinephrine = showInputDialog(null, "What is the patient's cureent norepinephrine? (): ");
+		String currentNorepinephrine = showInputDialog(null,
+				"What is the patient's cureent norepinephrine?(mcg/kg/minute): ");
 		while (!isNumeric(currentNorepinephrine)) {
-			currentNorepinephrine = showInputDialog(null, "What is the patient's cureent norepinephrine? (): ");
+			currentNorepinephrine = showInputDialog(null,
+					"What is the patient's cureent norepinephrine?(mcg/kg/minute): ");
 		}
 		Observation currentNorepinephrine1 = new Observation(LocalDateTime.now(), "Current Norepinephrine",
 				Double.parseDouble(currentNorepinephrine));
@@ -475,15 +484,15 @@ public class SepsisDeterminationApp {
 							}
 						}
 					}
-
 				} catch (ConnectException ex) {
 					JOptionPane.showMessageDialog(null, "Could not contact the server.");
 				} catch (FileNotFoundException ex) {
 					JOptionPane.showMessageDialog(null, "Could not contact the server.");
 				} catch (ProtocolException ex) {
 					JOptionPane.showMessageDialog(null, "Credentials were incorrect.");
+				} catch (NullPointerException ex) {
+					return;
 				}
-
 			}
 		}
 
