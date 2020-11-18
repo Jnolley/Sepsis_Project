@@ -382,85 +382,110 @@ public class SepsisDeterminationApp {
 
 	public static void main(String[] args) throws IOException {
 
-		/*
-		 * String serverLocation = showInputDialog(null, "Enter server location"); if
-		 * (serverLocation == null) { return; } else { String username =
-		 * showInputDialog(null, "Enter username: "); if (username == null) { return; }
-		 * else { String password = showInputDialog(null, "Enter password: "); if
-		 * (password == null) { return; } try { OpenMRSConnection connection = new
-		 * OpenMRSConnection(serverLocation, username, password);
-		 */
-		OpenMRSConnection connection = new OpenMRSConnection("localhost:8080", "admin", "Admin123");
-		String numberOfPatients = showInputDialog(null, "Enter number of patients");
-		if (numberOfPatients == null) {
+		String serverLocation = showInputDialog(null, "Enter server location");
+		if (serverLocation == null) {
 			return;
 		} else {
-			while (!isInt(numberOfPatients)) {
-				numberOfPatients = showInputDialog(null, "Enter number of patients");
-				if (numberOfPatients == null) {
+			String username = showInputDialog(null, "Enter username: ");
+			if (username == null) {
+				return;
+			} else {
+				String password = showInputDialog(null, "Enter password: ");
+				if (password == null) {
 					return;
 				}
-			}
-			String[] patientID = new String[Integer.parseInt(numberOfPatients)];
-			for (int i = 0; i < patientID.length; ++i) {
-				patientID[i] = showInputDialog(null, "Enter patientID: ");
-				if (patientID[i] == null) {
-					return;
-				}
-				if (!patientID[i].matches("[0-9A-Z]*")) {
-					patientID[i] = showInputDialog(null, "Enter patientID: ");
-				}
-				PatientRecord patientRecord = connection.getPatientRecord(patientID[i]);
-				if (patientRecord == null) {
-					JOptionPane.showMessageDialog(null, "Patient" + patientID[i] + " does not exist.");
-					return;
-				}
-				JOptionPane.showMessageDialog(null, "Patient" + patientID[i] + " exists.");
-				LocalDateTime now = LocalDateTime.now();
-				Period age = Period.between(patientRecord.getBirthDate(), now.toLocalDate());
-				System.out.println("  Time Reported: " + now.toString());
-				System.out.println("  PatientID: " + patientID[i]);
-				System.out.println(
-						"  Patient Name: " + patientRecord.getFamilyName() + " " + patientRecord.getGivenName());
-				System.out.println("  Age: " + age.getYears() + " years " + age.getMonths() + " months " + age.getDays()
-						+ " days");
-				System.out.println("  Location: " + patientRecord.getLocation());
-				Set<Observation> currentObservationList = new HashSet<Observation>();
-				Set<Observation> baselineObservationList = new HashSet<Observation>();
-				setUpObservationList(connection.getObservationRecords(patientRecord.getUUID()), currentObservationList,
-						baselineObservationList);
-				Concept currentConcepts = setUpCurrentConceptList(currentObservationList);
-				Concept baselineConcepts = setUpBaselineConceptList(baselineObservationList);
-				System.out.println(
-						SepsisDeterminationAlgorithm.analyze(patientRecord, baselineConcepts, currentConcepts));
-				for (Observation observation : currentObservationList) {
-					if (observation.getMeasurement() == null) {
-						System.out.println(
-								observation.getTimestamp() + ": " + observation.getConcept() + ": " + "unknown");
+				try {
+					OpenMRSConnection connection = new OpenMRSConnection(serverLocation, username, password);
+					String numberOfPatients = showInputDialog(null, "Enter number of patients");
+					if (numberOfPatients == null) {
+						return;
 					} else {
-						System.out.println(observation.getTimestamp() + ": " + observation.getConcept() + ": "
-								+ observation.getMeasurement());
+						while (!isInt(numberOfPatients)) {
+							numberOfPatients = showInputDialog(null, "Enter number of patients");
+							if (numberOfPatients == null) {
+								return;
+							}
+						}
+						String[] patientID = new String[Integer.parseInt(numberOfPatients)];
+						for (int i = 0; i < patientID.length; ++i) {
+							patientID[i] = showInputDialog(null, "Enter patientID: ");
+							if (patientID[i] == null) {
+								return;
+							}
+							if (!patientID[i].matches("[0-9A-Z]*")) {
+								patientID[i] = showInputDialog(null, "Enter patientID: ");
+							}
+							PatientRecord patientRecord = connection.getPatientRecord(patientID[i]);
+							if (patientRecord == null) {
+								JOptionPane.showMessageDialog(null, "Patient" + patientID[i] + " does not exist.");
+								return;
+							}
+							JOptionPane.showMessageDialog(null, "Patient" + patientID[i] + " exists.");
+							LocalDateTime now = LocalDateTime.now();
+							Period age = Period.between(patientRecord.getBirthDate(), now.toLocalDate());
+							System.out.println("  Time Reported: " + now.toString());
+							System.out.println("  PatientID: " + patientID[i]);
+							System.out.println("  Patient Name: " + patientRecord.getFamilyName() + " "
+									+ patientRecord.getGivenName());
+							System.out.println("  Age: " + age.getYears() + " years " + age.getMonths() + " months "
+									+ age.getDays() + " days");
+							System.out.println("  Location: " + patientRecord.getLocation());
+							String temperature = "unknown";
+							String heartRate = "unknown";
+							String respiratoryRate = "unknown";
+							for (ObservationRecord observation : connection
+									.getObservationRecords(patientRecord.getUUID())) {
+								if (observation.getConcept().equals("Temperature (C)")) {
+									temperature = String.valueOf(observation.getMeasurement());
+								} else if (observation.getConcept().equals("Pulse")) {
+									heartRate = String.valueOf(observation.getMeasurement());
+								} else if (observation.getConcept().equals("Respiratory rate")) {
+									respiratoryRate = String.valueOf(observation.getMeasurement());
+								}
+							}
+							System.out.println("  Body Temperature: " + temperature + " (C)");
+							System.out.println("  Heart Rate: " + heartRate + " (bpm)");
+							System.out.println("  Respiratory Rate: " + respiratoryRate + " (bpm)");
+							Set<Observation> currentObservationList = new HashSet<Observation>();
+							Set<Observation> baselineObservationList = new HashSet<Observation>();
+							setUpObservationList(connection.getObservationRecords(patientRecord.getUUID()),
+									currentObservationList, baselineObservationList);
+							Concept currentConcepts = setUpCurrentConceptList(currentObservationList);
+							Concept baselineConcepts = setUpBaselineConceptList(baselineObservationList);
+							System.out.println(SepsisDeterminationAlgorithm.analyze(patientRecord, baselineConcepts,
+									currentConcepts));
+							for (Observation observation : currentObservationList) {
+								if (observation.getMeasurement() == null) {
+									System.out.println(observation.getTimestamp() + ": " + observation.getConcept()
+											+ ": " + "unknown");
+								} else {
+									System.out.println(observation.getTimestamp() + ": " + observation.getConcept()
+											+ ": " + observation.getMeasurement());
+								}
+							}
+							System.out.println();
+							for (Observation observation : baselineObservationList) {
+								if (observation.getMeasurement() == null) {
+									System.out.println(observation.getTimestamp() + ": " + observation.getConcept()
+											+ ": " + "unknown");
+								} else {
+									System.out.println(observation.getTimestamp() + ": " + observation.getConcept()
+											+ ": " + observation.getMeasurement());
+								}
+							}
+						}
 					}
+
+				} catch (ConnectException ex) {
+					JOptionPane.showMessageDialog(null, "Could not contact the server.");
+				} catch (FileNotFoundException ex) {
+					JOptionPane.showMessageDialog(null, "Could not contact the server.");
+				} catch (ProtocolException ex) {
+					JOptionPane.showMessageDialog(null, "Credentials were incorrect.");
 				}
-				for (Observation observation : baselineObservationList) {
-					if (observation.getMeasurement() == null) {
-						System.out.println(
-								observation.getTimestamp() + ": " + observation.getConcept() + ": " + "unknown");
-					} else {
-						System.out.println(observation.getTimestamp() + ": " + observation.getConcept() + ": "
-								+ observation.getMeasurement());
-					}
-				}
+
 			}
 		}
-		/*
-		 * } catch (ConnectException ex) { JOptionPane.showMessageDialog(null,
-		 * "Could not contact the server."); } catch (FileNotFoundException ex) {
-		 * JOptionPane.showMessageDialog(null, "Could not contact the server."); } catch
-		 * (ProtocolException ex) { JOptionPane.showMessageDialog(null,
-		 * "Credentials were incorrect."); }
-		 * 
-		 * } }
-		 */
+
 	}
 }
