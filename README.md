@@ -2,10 +2,10 @@
 
 The Sepsis detection app connects to OpenMRS and, given a patient ID,
 automatically determines whether or not that patient has symptoms indicative of
-Sepsis using the MD Anderson Cancer Center Sepsis determination algorithm. The app will report one of seven outcomes. It could report that the patient has Sepsis or has experienced Septic Shock. It could report that the algorithm could not be run because the patient is either pregnant or is not an adult. It could report a Code Blue meaning the patient is unresponsive. It could report that the patient should continued to be monitored. If the algorithm fails then it will report Indeterminate.
+Sepsis using the MD Anderson Cancer Center Sepsis determination algorithm. The app will get the information from the OpenMRS Server and report the patient's information about name, age, address, body temperature, heart rate, respiratory rate, and a sepsis determination. The sepsis determination could decide if the patient is adult, is pregnant or not. Then, based on the information taken from the OpenMRS Database and from the user's input, it would decide to either send the patient to the Code Blue Team, to continue monitoring, the patient has sepsis,the patient need septic shock, or inderterminate.
 
 Project status: **feature-complete, algorithm unit tested, application manually tested, no test failures, no known
-bugs**
+bugs, have not been able to list all the needed information if the determination is indeterminate**
 
 Authors:
 *   Adam Kamrath <akamrath2@huskers.unl.edu>
@@ -138,11 +138,11 @@ includes:
 *   The steps necessary to verify the output with respect to the expected output
     to determine if the test has passed or failed.
 
-The manual tests require the use of the openMRS online database and the use of
+The manual tests require the use of the OpenMRS online database and the use of
 patient data from there.
 
 No UI testing, security testing, or load/stress testing was performed for this
 milestone.
 
-The app is passing all unit-level and Manual tests. The unit-level tests
+The app passed all unit-level and Manual tests. The unit-level tests
 achieve 100% statement coverage of the code developed by our team.
