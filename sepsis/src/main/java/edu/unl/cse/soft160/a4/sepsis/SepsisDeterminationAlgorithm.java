@@ -116,14 +116,16 @@ public class SepsisDeterminationAlgorithm {
 		} else if (concept.getGlasgowComaScale() < 6) {
 			scoreGlasgowComaScale = 4;
 		}
-		if (concept.getRenalCreatinine() < 1.2) {
+		if (concept.getRenalCreatinine() == null) {
+			return Math.min(scoreRespiratoryPaOxyFiOxy, Math.min(scoreCoagulation,
+					Math.min(scoreLiverBilirubin, Math.min(scoreCardiovascularHypotension, scoreGlasgowComaScale))));
+		} else if (concept.getRenalCreatinine() < 1.2) {
 			scoreCreatinineorUrine = 0;
 		} else if (concept.getRenalCreatinine() >= 1.2 && concept.getRenalCreatinine() <= 1.9) {
 			scoreCreatinineorUrine = 1;
 		} else if (concept.getRenalCreatinine() >= 2 && concept.getRenalCreatinine() <= 3.4) {
 			scoreCreatinineorUrine = 2;
-		}
-		if ((concept.getRenalCreatinine() >= 3.4 && concept.getRenalCreatinine() < 4.9)) {
+		} else if ((concept.getRenalCreatinine() >= 3.4 && concept.getRenalCreatinine() < 4.9)) {
 			scoreCreatinineorUrine = 3;
 		} else if (concept.getRenalCreatinine() >= 5) {
 			scoreCreatinineorUrine = 4;
@@ -151,7 +153,7 @@ public class SepsisDeterminationAlgorithm {
 	}
 
 	public static boolean isSepsis(Concept currentConcept, Concept baselineConcepts) {
-		if (organDysfunction(currentConcept, baselineConcepts) && isInfection(currentConcept)
+		if (organDysfunction(currentConcept, baselineConcepts) && !isInfection(currentConcept)
 				&& currentConcept.getIsImmunocompromised()) {
 			return true;
 		} else {
