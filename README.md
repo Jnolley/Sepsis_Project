@@ -4,8 +4,8 @@ The Sepsis detection app connects to OpenMRS and, given a patient ID,
 automatically determines whether or not that patient has symptoms indicative of
 Sepsis using the MD Anderson Cancer Center Sepsis determination algorithm. The app will report one of seven outcomes. It could report that the patient has Sepsis or has experienced Septic Shock. It could report that the algorithm could not be run because the patient is either pregnant or is not an adult. It could report a Code Blue meaning the patient is unresponsive. It could report that the patient should continued to be monitored. If the algorithm fails then it will report Indeterminate.
 
-Project status: **feature-complete, fully tested, no test failures, and no known
-bugs**
+Project status: **feature-complete, mostly tested, a couple test failures, few known
+bugs being worked on**
 
 Authors:
 *   Adam Kamrath <akamrath2@huskers.unl.edu>
@@ -52,7 +52,8 @@ login credentials to the OpenMRS server. Enter this information as requested.
 
 The app will then prompt the user for a patient ID. Once the patient ID has been
 entered, the app will print a report for that patient. If the patient ID is left
-blank, the app will exit.
+blank, the app will exit. Once the app is connected to your patient, it will prompt
+for the data points necessary to make a sepsis determination.
 
 ## Software Architecture
 
@@ -60,90 +61,74 @@ The Sepsis detection app is organized into three tiers: a connector to
 the OpenMRS backend&nbsp;(`rest_backend`), an implementation of the Sepsis determination algorithm&nbsp;(`sepsis`), and a command-line
 interface&nbsp;(`cli`):
 
-1.  The `rest_backend` package mostly contains classes for representing OpenMRS
+1.  The `rest_connector` package mostly contains classes for representing OpenMRS
     types locally:
 
-	*   `Clinic.java`
-	*   `Patient.java`
-	*   `Medication.java`
+	*   `PatientRecord.java`
+	*   `ObservationRecord.java`
+
+	An additional file connects the program to the online server and pulls the 
+	data:
+
+	*   `RestConnection.java`
+
+
+2.  The `sepsis` package contains multiple files:
+
+ 	*   `SepsisDetermination.java`
+	*   `SepsisDeterminationApp.java`
+	*   `SepsisDeterminationAlgorithm.java`
 	*   `Concept.java`
 	*   `Observation.java`
+	
 
-	An additional class handles observations that must be matched to each other:
-
-	*   `SimultaneousObservations.java`
-
-	And timestamp support within these classes is provided by an abstract
-    superclass:
-
-	*   `TimestampedObject.java`
-
-2.  The `heart_failure` package contains a single entry point:
-
-    *   `HeartFailureAlgorithm.java`
-
-	The heart failure determination algorithm itself is implemented by
+	The Sepsis determination algorithm itself is implemented by
     several classes, which perform most of their computation at
     construction but can also act as return types:
 
-	*   `OrganDysfunctionDetermination.java`
-	*   `MissingLabsDetermination.java`
+	*   `Concept.java`
+	*   `Observation.java`
 
-	Common determination codes are kept in an abstract superclass:
 
-	*   `Determination.java`
+	Sepsis determination algorithm calculates the determination from
+	the values pulled from the openMRS database:
 
-	And evidence is in the form of observations falling inside or outside of
-    certain reference ranges:
+	*    `SepsisDeterminationAlgorithm.java`
 
-	*    `ObservationInInterval.java`
+	
 
-	These objects are in turn supported by a class for ranges:
+	The SepsisDetermination file conatains the code creates the enumerated
+	types to be output to support the algorithm :
 
-	*    `Interval.java`
+	*   `SepsisDetermination.java`
 
-	As for medication data, it is to be loaded on demand, not preloaded, so the
-    screening package provides an interface that a (frontend) medication data
-    source must implement:
+	Finally the SepsisDeterminationApp contains the code that interacts with
+	the user and gets the values that are not gotten from the OpenMRS database
+	This is the file that makes the text boxes pop up and prompts the user
+	for the necessary data :
 
-	*   `MedicationDataSource.java`
+	*   `SepsisDetermination.java`
 
-3.  The `cli` package provides the main class:
 
-    *   `HeartFailureDeterminationApp.java`
-
-	which in turn uses command-line utility functions:
-
-	*   `CLI.java`
-
-	Major responsibilities, such as asking the user for medication data or
-    formatting the final report, are delegated to separate classes:
-
-	*   `MedicationQuestioner.java`
-	*   `Report.java`
-
-Finally, while not code per se, internationalization data for the command-line
-interface is kept in `HeartFailure.properties` inside the `resources` folder.
 
 ## Testing  & Test Results
 
-The heart failure determination app has been verified with automated unit tests
-of the ACME heart failure determination algorithm and manual system tests of the
+The sepsis determination app has been verified with automated unit tests
+of the sepsis determination algorithm and manual system tests of the
 app as a whole. Both types of tests were designed using the specifications
 provided to derive categories and partitions to support category-partition
 testing. The test suites were then augmented to achieve 100% code coverage. The
-categories and partitions chosen are documented in a separate file we created
-called `test_design.md`, which is in the `documentation` folder.
+manual tests are documented in separate files we created
+called `Manual Tests`, which is in the `documentation` folder.
 
-Unit tests are available in three classes in the `test` folder:
+Unit tests are available in the classes in the `test` folder:
 
-*   `HeartFailureTest.java`
-*   `OrganDysfunctionDeterminationTest.java`
-*   `MissingLabsDeterminationTest.java`
+*   `SepsisDeterminationAlgorithmTest.java`
+
 
 The unit tests require JUnit 4.
 
-System tests are documented as Markdown in the `system_tests` folder. Each test
+Manual tests are documented as Markdown in the `Manual Tests` folder. Each test
 includes:
 
 *   The steps necessary to reset the test environment (i.e., the OpenMRS
@@ -153,10 +138,11 @@ includes:
 *   The steps necessary to verify the output with respect to the expected output
     to determine if the test has passed or failed.
 
-The system tests do not require any special tools or software.
+The manual tests require the use of the openMRS online database and the use of
+patient data from there.
 
 No UI testing, security testing, or load/stress testing was performed for this
 milestone.
 
-The app is passing all unit-level and system-level tests. The unit-level tests
+The app is passing all unit-level and Manual tests. The unit-level tests
 achieve 100% statement coverage of the code developed by our team.
