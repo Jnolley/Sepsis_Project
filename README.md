@@ -4,8 +4,8 @@ The Sepsis detection app connects to OpenMRS and, given a patient ID,
 automatically determines whether or not that patient has symptoms indicative of
 Sepsis using the MD Anderson Cancer Center Sepsis determination algorithm. The app will report one of seven outcomes. It could report that the patient has Sepsis or has experienced Septic Shock. It could report that the algorithm could not be run because the patient is either pregnant or is not an adult. It could report a Code Blue meaning the patient is unresponsive. It could report that the patient should continued to be monitored. If the algorithm fails then it will report Indeterminate.
 
-Project status: **feature-complete, mostly tested, a couple test failures, few known
-bugs being worked on**
+Project status: **feature-complete, algorithm unit tested, application manually tested, no test failures, no known
+bugs**
 
 Authors:
 *   Adam Kamrath <akamrath2@huskers.unl.edu>
