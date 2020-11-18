@@ -472,7 +472,6 @@ public class SepsisDeterminationApp {
 											+ ": " + observation.getMeasurement());
 								}
 							}
-							System.out.println();
 							for (Observation observation : baselineObservationList) {
 								if (observation.getMeasurement() == null) {
 									System.out.println(observation.getTimestamp() + ": " + observation.getConcept()
